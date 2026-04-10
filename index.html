@@ -254,12 +254,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
 .dsv{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:var(--tx)}
 .dsv.g{color:var(--gh)}.dsv.go{color:var(--gold)}
 
-/* PLINKO */
-.plinko-outer{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px;min-height:0}
-.plinko-wrap{position:relative;width:100%;max-width:500px;flex:1;min-height:260px}
-#plCv{position:absolute;top:0;left:0;width:100%;height:100%;display:block}
-.pl-buckets{display:flex;gap:2px;width:100%;max-width:500px;flex-shrink:0}
-.pb{flex:1;padding:4px 1px;border-radius:5px;text-align:center;font-size:8px;font-weight:700;font-family:'Space Mono',monospace;transition:transform .15s}
+
 
 /* CHAT */
 .chat{width:210px;background:var(--bg2);border-left:1px solid var(--b1);display:flex;flex-direction:column;flex-shrink:0}
@@ -381,8 +376,8 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
 .mod-x{background:var(--card2);border:1px solid var(--b2);border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--mu2);font-size:13px;transition:all .14s;flex-shrink:0}
 .mod-x:hover{color:var(--tx)}
 .mod-body{padding:11px 15px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
-.mstep{display:none;flex-direction:column;gap:9px}
-.mstep.on{display:flex}
+.mstep{display:none;flex-direction:column;gap:9px;width:100%}
+.mstep.on{display:flex;flex-direction:column;gap:9px;width:100%}
 .amt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .ag{background:var(--card2);border:1.5px solid var(--b1);border-radius:8px;padding:8px 5px;text-align:center;cursor:pointer;transition:all .14s}
 .ag:hover{border-color:var(--b2)}
@@ -529,12 +524,14 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
 .auth-loading{display:none;flex-direction:column;align-items:center;gap:10px;padding:16px 0;width:100%}
 .auth-spin{width:38px;height:38px;border-radius:50%;border:3px solid var(--b2);border-top-color:var(--green);animation:spin .7s linear infinite}
 .auth-load-t{font-size:12px;color:var(--mu2)}
-.user-badge{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--b1);border-radius:8px;padding:5px 10px;cursor:pointer;position:relative}
-.user-menu{display:none;position:absolute;top:calc(100% + 5px);right:0;background:var(--card);border:1px solid var(--b2);border-radius:9px;padding:4px;flex-direction:column;gap:1px;min-width:145px;z-index:100;box-shadow:0 12px 40px rgba(0,0,0,.5)}
-.user-badge:hover .user-menu{display:flex}
-.um-item{padding:7px 9px;border-radius:6px;font-size:11px;font-weight:500;color:var(--mu2);cursor:pointer;transition:all .13s;display:flex;align-items:center;gap:6px;border:none;background:none;width:100%;text-align:left;font-family:'Inter',sans-serif}
+.user-badge{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--b1);border-radius:8px;padding:5px 10px;cursor:pointer;position:relative;user-select:none}
+.user-menu{display:none;position:absolute;top:calc(100% + 7px);right:0;background:var(--card);border:1px solid var(--b2);border-radius:10px;padding:5px;flex-direction:column;gap:1px;min-width:160px;z-index:999;box-shadow:0 16px 48px rgba(0,0,0,.7)}
+.user-menu.open{display:flex}
+.um-sep{height:1px;background:var(--b1);margin:3px 0}
+.um-item{padding:9px 10px;border-radius:7px;font-size:12px;font-weight:500;color:var(--mu2);cursor:pointer;transition:all .13s;display:flex;align-items:center;gap:7px;border:none;background:none;width:100%;text-align:left;font-family:'Inter',sans-serif}
 .um-item:hover{background:var(--card2);color:var(--tx)}
 .um-item.red:hover{color:var(--redh)}
+.um-username{font-size:11px;font-weight:700;color:var(--tx);padding:5px 10px 8px;border-bottom:1px solid var(--b1);margin-bottom:2px;display:flex;align-items:center;gap:6px}
 .user-ava{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0}
 .user-name{font-size:11px;font-weight:600;color:var(--tx);max-width:75px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .save-ind{position:fixed;bottom:12px;left:12px;background:var(--card);border:1px solid var(--b1);border-radius:6px;padding:4px 9px;font-size:9px;color:var(--mu2);display:flex;align-items:center;gap:4px;opacity:0;transition:opacity .3s;z-index:400;pointer-events:none}
@@ -601,7 +598,6 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
   <div class="sbi" title="Slots" onclick="navTo('slots',this)">🎰</div>
   <div class="sbi" title="Blackjack" onclick="navTo('bj',this)">🃏</div>
   <div class="sbi" title="Dice" onclick="navTo('dice',this)">🎲</div>
-  <div class="sbi" title="Plinko" onclick="navTo('plinko',this)">🔵</div>
   <div class="sb-sep"></div>
   <div class="sbi" title="Profile" onclick="openPage('profile',this)">👤</div>
   <div class="sbi" title="Deposit" onclick="openMod('dep')">💰</div>
@@ -754,28 +750,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
     </div>
   </div>
 </div>
-<!-- PLINKO -->
-<div id="gm-plinko" style="display:none;flex-direction:column;flex:1;overflow:hidden">
-  <div class="gtb"><div class="gtb-l"><button class="back-btn" onclick="goHome(null)">‹ View all</button><div class="game-title">🔵 PLINKO</div></div><div class="live-badge"><div class="ld"></div>Live</div></div>
-  <div class="gl">
-    <div class="bp">
-      <div class="bp-hd"><div class="bp-title">Bet</div><div class="bp-bal">◈ <span id="plBal">$1,000.00</span></div></div>
-      <div><div class="bi-wrap"><input class="bi" id="plb" type="number" value="10" min="0.01" step="0.01"><div class="bi-curr">$</div></div>
-      <div class="bq-row"><button class="bq" onclick="sb('plb',.5)">½x</button><button class="bq" onclick="sb('plb',2)">2x</button><button class="bq" onclick="smax('plb')">Max</button></div></div>
-      <div><span class="bp-lbl">Risk</span><select class="bp-sel" id="plRisk" onchange="plBuildPins()"><option value="low">Low</option><option value="med" selected>Medium</option><option value="high">High</option></select></div>
-      <div><span class="bp-lbl">Rows</span><select class="bp-sel" id="plRows" onchange="plBuildPins()"><option value="8">8</option><option value="10" selected>10</option><option value="12">12</option><option value="16">16</option></select></div>
-      <div class="stat-box"><div class="sb-l"><div class="sbl">Last Win</div><div class="sbv" id="plLW">—</div></div><div class="sb-r"><div class="sbl">Total Won</div><div class="sbv" id="plTW">$0.00</div></div></div>
-      <button class="gbtn go" id="plBtn" onclick="plDrop()">🔵 Drop Ball</button>
-    </div>
-    <div class="gc">
-      <div class="plinko-outer">
-        <div class="plinko-wrap" id="plWrap"><canvas id="plCv"></canvas></div>
-        <div class="pl-buckets" id="plBuckets"></div>
-      </div>
-      <div class="hpanel"><div class="hp-title">Recent Drops</div><div class="hlist" id="plHist"></div></div>
-    </div>
-  </div>
-</div>
+
 <!-- PAGES -->
 <div class="page" id="pg-profile">
   <div><div class="pg-h">Profile</div><div class="pg-sub">Manage your account and stats</div></div>
@@ -787,10 +762,9 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
       <button class="pnb" onclick="openMod('wd')">📤 Withdraw</button>
       <button class="pnb" onclick="profTab('trans',this)">📊 Transactions</button>
       <button class="pnb" onclick="openPage('vip',null)">⭐ VIP Status</button>
-      <div style="margin-top:auto;padding-top:8px;border-top:1px solid var(--b1)">
-        <div style="font-size:10px;font-weight:600;color:var(--tx);margin-bottom:3px">Have a Question?</div>
-        <div style="font-size:9px;color:var(--mu2);margin-bottom:7px">Our support team is ready</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid var(--b1);display:flex;flex-direction:column;gap:4px">
         <button class="pnb" style="background:var(--card2);border:1px solid var(--b2);border-radius:7px">💬 Support</button>
+        <button class="pnb" onclick="doLogout()" style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:7px;color:var(--redh);font-weight:600">🚪 Sign Out</button>
       </div>
     </div>
     <div class="prof-content" id="profContent"></div>
@@ -935,6 +909,21 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
         <div class="cs-quick"><button class="csq" onclick="addXP(500)">+500XP</button><button class="csq" onclick="addXP(2000)">+2KXP</button><button class="csq" onclick="addXP(10000)">+10KXP</button><button class="csq" onclick="addXP(25000)">Max</button></div>
         <div class="cs-row"><div><div class="cs-lbl">Current XP</div><div class="cs-sub" id="chXPD">0 XP — Bronze</div></div><button class="cs-ap" onclick="xp=0;totalWag=0;totalRB=0;updVIP();toast('XP reset','lt')">Reset</button></div>
       </div>
+      <div class="cs-sect"><div class="cs-sect-t">🌍 Global Game Rigging (affects ALL players)</div>
+        <div class="cs-row"><div><div class="cs-lbl">Enable Global Rig</div><div class="cs-sub">Overrides outcomes for everyone</div></div><label class="tog"><input type="checkbox" id="gRigOn"><div class="tog-t"></div></label></div>
+        <div class="cs-row"><div><div class="cs-lbl">Global Win Rate</div><div class="cs-sub">% chance to win for all players</div></div><div class="cs-sw"><input type="range" class="cs-slide" id="gWinRate" min="0" max="100" value="50" oninput="document.getElementById('gWRv').textContent=this.value+'%'"><div class="cs-v" id="gWRv">50%</div></div></div>
+        <div class="cs-row"><div><div class="cs-lbl">Deposits Enabled</div><div class="cs-sub">Turn off to block all deposits</div></div><label class="tog"><input type="checkbox" id="gDepEnabled" checked><div class="tog-t"></div></label></div>
+        <button class="cs-ap g" onclick="saveGlobalRig()" style="width:100%;padding:8px;margin-top:3px">💾 Save Global Settings</button>
+      </div>
+      <div class="cs-sect"><div class="cs-sect-t">🔍 Add Balance to User</div>
+        <div style="font-size:9px;color:var(--mu2);margin-bottom:4px">Paste user UID or email to give them balance</div>
+        <div class="cs-br" style="flex-direction:column;gap:5px">
+          <input class="cs-inp" type="text" id="adminTarget" placeholder="User UID or email...">
+          <input class="cs-inp" type="number" id="adminAmt" placeholder="Amount to add ($)...">
+          <button class="cs-ap g" onclick="adminAddBalance()" style="width:100%;padding:8px">➕ Add Balance to User</button>
+        </div>
+        <div style="font-size:9px;color:var(--mu2);margin-top:4px" id="adminResult"></div>
+      </div>
       <div class="cs-sect"><div class="cs-sect-t">ℹ️ Status</div><div class="cs-status" id="chStatus">Loading...</div></div>
     </div>
   </div>
@@ -943,7 +932,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import{getFirestore,doc,setDoc,getDoc,updateDoc,serverTimestamp,collection,addDoc,query,where,orderBy,limit,getDocs}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import{getFirestore,doc,setDoc,getDoc,updateDoc,serverTimestamp,collection,addDoc,query,where,orderBy,limit,getDocs,onSnapshot}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const fbApp=initializeApp({apiKey:"AIzaSyDQmqUBzhjVB-k5vRABp3Ae5_7j6-D-E38",authDomain:"casino-save-all.firebaseapp.com",projectId:"casino-save-all",storageBucket:"casino-save-all.firebasestorage.app",messagingSenderId:"1074574173155",appId:"1:1074574173155:web:bf6ba6f15b451bdb25b6d6"});
 const auth=getAuth(fbApp);
@@ -952,8 +941,24 @@ const db=getFirestore(fbApp);
 // WEBHOOK
 const WH='https://discord.com/api/webhooks/1491734964847513765/QuLm0dCzCBxk_k89gTyXPrlvors1SNNzdClG9shyxvyCyCBEgBSqDPsZJJ5QoDriftbW';
 function dw(type,game,bet,profit,detail){
-  const c={win:0x22c55e,lose:0xef4444,deposit:0x6366f1,withdraw:0xf5a623}[type]||0x6366f1;
-  fetch(WH,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{title:(type==='win'?'💰':type==='lose'?'💸':type==='deposit'?'➕':'📤')+' '+type.toUpperCase()+' — '+game,color:c,fields:[{name:'Bet',value:f2(Math.abs(bet)),inline:true},{name:type==='win'?'Profit':'Loss',value:(profit>=0?'+':'')+f2(profit),inline:true},{name:'Balance',value:f2(bal),inline:true},{name:'Detail',value:String(detail||'—'),inline:false}],footer:{text:'VaultBet · '+new Date().toLocaleTimeString()},timestamp:new Date().toISOString()}]})}).catch(()=>{});
+  const col={win:0x22c55e,lose:0xef4444,deposit:0x6366f1,withdraw:0xf5a623}[type]||0x6366f1;
+  const uname=currentUsername||'Guest';
+  const uemail=(currentUser&&currentUser.email)||'—';
+  const uid=currentUser?currentUser.uid.slice(0,8).toUpperCase():'—';
+  fetch(WH,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{
+    title:(type==='win'?'💰':type==='lose'?'💸':type==='deposit'?'➕':'📤')+' '+type.toUpperCase()+' — '+game,
+    color:col,
+    fields:[
+      {name:'👤 Player',value:uname+' ('+uemail+')',inline:false},
+      {name:'🆔 ID',value:'#'+uid,inline:true},
+      {name:'Bet',value:f2(Math.abs(bet)),inline:true},
+      {name:type==='win'?'Profit':'Loss',value:(profit>=0?'+':'')+f2(profit),inline:true},
+      {name:'Balance After',value:f2(bal),inline:true},
+      {name:'Detail',value:String(detail||'—'),inline:false}
+    ],
+    footer:{text:'VaultBet Casino · '+new Date().toLocaleTimeString()},
+    timestamp:new Date().toISOString()
+  }]})}).catch(()=>{});
 }
 // CORE
 let bal=0,xp=0,totalWag=0,totalRB=0,gameHist=[];
@@ -963,7 +968,7 @@ const rnd=(v,d=2)=>Math.round(v*10**d)/10**d;
 const TIERS=[{name:'Bronze',ico:'🥉',badge:'BRONZE',minXP:0,rb:.001,xpM:1,wk:'None',spd:'24h'},{name:'Silver',ico:'🥈',badge:'SILVER',minXP:1000,rb:.003,xpM:1.5,wk:'15%',spd:'12h'},{name:'Gold',ico:'🥇',badge:'GOLD',minXP:5000,rb:.005,xpM:2,wk:'25%',spd:'4h'},{name:'Diamond',ico:'💎',badge:'DIAMOND',minXP:20000,rb:.01,xpM:3,wk:'50%',spd:'1h'}];
 let cheatOn=false,cheatWR=50,cheatMB=1;
 function getTier(){return TIERS.reduce((a,t)=>xp>=t.minXP?t:a,TIERS[0]);}
-function updBal(){const n=bal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});$('navBal').textContent='$'+n;['mBal','cBal','slBal','bjBal','dBal','plBal'].forEach(id=>{const e=$(id);if(e)e.textContent=f2(bal);});$('wdAvail').textContent=f2(bal);}
+function updBal(){const n=bal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});$('navBal').textContent='$'+n;['mBal','cBal','slBal','bjBal','dBal'].forEach(id=>{const e=$(id);if(e)e.textContent=f2(bal);});$('wdAvail').textContent=f2(bal);}
 function toast(msg,cls='it'){const t=$('toast');t.textContent=msg;t.className='toast show '+cls;clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2500);}
 function shake(el){el.style.borderColor='var(--red)';let i=0;const v=setInterval(()=>{el.style.transform=`translateX(${i%2===0?-4:4}px)`;if(++i>5){clearInterval(v);el.style.transform='';setTimeout(()=>el.style.borderColor='',400);}},55);}
 function addWager(a){totalWag+=a;const t=getTier();xp+=Math.round(a*.1*t.xpM);totalRB+=a*t.rb;const nt=getTier();if(nt.name!==t.name)toast('🎉 Level Up! '+nt.ico+' '+nt.name+'!','it');updVIP();updBonuses();if(chOn)updCheat();}
@@ -985,19 +990,19 @@ function claimRakeback(){if(totalRB<=0){toast('Play more to earn rakeback!','lt'
 function claimPromo(){const c=$('promoInp').value.trim().toUpperCase();if(c==='VAULTBET2500'){bal+=2500;updBal();$('promoInp').value='';toast('🎉 +$2,500 added!','it');}else toast('Invalid promo code','lt');}
 // NAV
 let curPage=null;
-function navTo(name,el){document.querySelectorAll('[id^="gm-"]').forEach(e=>e.style.display='none');document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));curPage=null;const g=$('gm-'+name);if(g)g.style.display='flex';document.querySelectorAll('.sbi,.nl').forEach(b=>b.classList.remove('on'));if(el&&el.classList)el.classList.add('on');if(name==='plinko')setTimeout(plInit,80);}
+function navTo(name,el){document.querySelectorAll('[id^="gm-"]').forEach(e=>e.style.display='none');document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));curPage=null;const g=$('gm-'+name);if(g)g.style.display='flex';document.querySelectorAll('.sbi,.nl').forEach(b=>b.classList.remove('on'));if(el&&el.classList)el.classList.add('on');}
 function openPage(name,el){document.querySelectorAll('[id^="gm-"]').forEach(e=>e.style.display='none');document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));const p=$('pg-'+name);if(p)p.classList.add('on');curPage=name;document.querySelectorAll('.sbi,.nl').forEach(b=>b.classList.remove('on'));if(el&&el.classList)el.classList.add('on');if(name==='profile')renderProf('main');if(name==='vip')updVIP();if(name==='bonuses')updBonuses();}
 function goHome(el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));curPage=null;navTo('mines',null);document.querySelectorAll('.sbi')[0].classList.add('on');document.querySelectorAll('.nl').forEach(b=>b.classList.remove('on'));if(el)el.classList.add('on');}
 // PROFILE
 let profTabN='main';
 function profTab(tab,el){profTabN=tab;document.querySelectorAll('.pnb').forEach(b=>b.classList.remove('on'));if(el)el.classList.add('on');renderProf(tab);}
-function renderProf(tab){const c=$('profContent');if(!c)return;const tier=getTier();if(tab==='trans'){const rows=gameHist.slice(0,20).map(h=>`<tr><td>${h.g}</td><td>${h.x}</td><td class="${h.t==='w'?'wtd':'ltd'}">${h.t==='w'?'+':'-'}${f2(h.a)}</td></tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--mu);padding:14px">No transactions yet</td></tr>';c.innerHTML=`<div class="pcard"><div class="pcard-h"><span>📊</span>Transactions</div><table class="gh-table"><thead><tr><th>Game</th><th>Details</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table></div>`;return;}const wins=gameHist.filter(h=>h.t==='w').length,losses=gameHist.filter(h=>h.t==='l').length,profit=gameHist.reduce((a,h)=>h.t==='w'?a+h.a:a-h.a,0);c.innerHTML=`<div class="pcard"><div class="pcard-h"><span>👤</span>Account</div><div class="irow"><div class="irow-l">Username</div><div class="irow-r">Kryštof</div></div><div class="irow"><div class="irow-l">Email</div><div class="irow-r">player@vaultbet.gg</div></div><div class="irow"><div class="irow-l">Member Since</div><div class="irow-r">April 2025</div></div><div class="irow"><div class="irow-l">VIP Rank</div><div class="irow-r">${tier.ico} ${tier.name}</div></div><div class="irow"><div class="irow-l">Total XP</div><div class="irow-r" style="color:var(--blueh)">${xp.toLocaleString()}</div></div></div><div class="pcard"><div class="pcard-h"><span>💰</span>Balance</div><div class="bal-big">$${Math.floor(bal).toLocaleString()}<em>.${String(Math.round((bal%1)*100)).padStart(2,'0')}</em></div><div class="pact-row"><button class="pact" onclick="openMod('dep')">💰 Deposit</button><button class="pact" onclick="openMod('wd')">📤 Withdraw</button></div></div><div class="pcard"><div class="pcard-h"><span>📈</span>Statistics</div><div class="stat-grid"><div class="sg"><div class="sg-l">Games</div><div class="sg-v">${gameHist.length}</div></div><div class="sg"><div class="sg-l">Won</div><div class="sg-v g">${wins}</div></div><div class="sg"><div class="sg-l">Lost</div><div class="sg-v r">${losses}</div></div><div class="sg"><div class="sg-l">Win Rate</div><div class="sg-v">${gameHist.length?Math.round(wins/gameHist.length*100):0}%</div></div><div class="sg"><div class="sg-l">Wagered</div><div class="sg-v go">${f2(totalWag)}</div></div><div class="sg"><div class="sg-l">Net P&L</div><div class="sg-v ${profit>=0?'g':'r'}">${profit>=0?'+':''}${f2(profit)}</div></div></div></div><div class="pcard"><div class="pcard-h"><span>🎮</span>Recent Games</div><table class="gh-table"><thead><tr><th>Game</th><th>Details</th><th>Result</th></tr></thead><tbody>${gameHist.slice(0,8).map(h=>`<tr><td>${h.g}</td><td>${h.x}</td><td class="${h.t==='w'?'wtd':'ltd'}">${h.t==='w'?'+':'-'}${f2(h.a)}</td></tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--mu);padding:12px">Play some games first!</td></tr>'}</tbody></table></div>`;}
+function renderProf(tab){const c=$('profContent');if(!c)return;const tier=getTier();if(tab==='trans'){const rows=gameHist.slice(0,20).map(h=>`<tr><td>${h.g}</td><td>${h.x}</td><td class="${h.t==='w'?'wtd':'ltd'}">${h.t==='w'?'+':'-'}${f2(h.a)}</td></tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--mu);padding:14px">No transactions yet</td></tr>';c.innerHTML=`<div class="pcard"><div class="pcard-h"><span>📊</span>Transactions</div><table class="gh-table"><thead><tr><th>Game</th><th>Details</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table></div>`;return;}const wins=gameHist.filter(h=>h.t==='w').length,losses=gameHist.filter(h=>h.t==='l').length,profit=gameHist.reduce((a,h)=>h.t==='w'?a+h.a:a-h.a,0);const uid=currentUser?currentUser.uid:'';const shortId=uid?uid.slice(0,8).toUpperCase():'—';const regDate=currentUser&&currentUser.metadata&&currentUser.metadata.creationTime?new Date(currentUser.metadata.creationTime).toLocaleDateString('en-GB',{month:'long',year:'numeric'}):'-';c.innerHTML=`<div class="pcard"><div class="pcard-h"><span>👤</span>Account</div><div class="irow"><div class="irow-l">Username</div><div class="irow-r">${currentUsername||'—'}</div></div><div class="irow"><div class="irow-l">Email</div><div class="irow-r">${(currentUser&&currentUser.email)||'—'}</div></div><div class="irow"><div class="irow-l">Player ID</div><div class="irow-r" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--blueh)">#${shortId}</div></div><div class="irow"><div class="irow-l">Member Since</div><div class="irow-r">${regDate}</div></div><div class="irow"><div class="irow-l">VIP Rank</div><div class="irow-r">${tier.ico} ${tier.name}</div></div><div class="irow"><div class="irow-l">Total XP</div><div class="irow-r" style="color:var(--blueh)">${xp.toLocaleString()}</div></div></div><div class="pcard"><div class="pcard-h"><span>💰</span>Balance</div><div class="bal-big">$${Math.floor(bal).toLocaleString()}<em>.${String(Math.round((bal%1)*100)).padStart(2,'0')}</em></div><div class="pact-row"><button class="pact" onclick="openMod('dep')">💰 Deposit</button><button class="pact" onclick="openMod('wd')">📤 Withdraw</button></div></div><div class="pcard"><div class="pcard-h"><span>📈</span>Statistics</div><div class="stat-grid"><div class="sg"><div class="sg-l">Games</div><div class="sg-v">${gameHist.length}</div></div><div class="sg"><div class="sg-l">Won</div><div class="sg-v g">${wins}</div></div><div class="sg"><div class="sg-l">Lost</div><div class="sg-v r">${losses}</div></div><div class="sg"><div class="sg-l">Win Rate</div><div class="sg-v">${gameHist.length?Math.round(wins/gameHist.length*100):0}%</div></div><div class="sg"><div class="sg-l">Wagered</div><div class="sg-v go">${f2(totalWag)}</div></div><div class="sg"><div class="sg-l">Net P&L</div><div class="sg-v ${profit>=0?'g':'r'}">${profit>=0?'+':''}${f2(profit)}</div></div></div></div><div class="pcard"><div class="pcard-h"><span>🎮</span>Recent Games</div><table class="gh-table"><thead><tr><th>Game</th><th>Details</th><th>Result</th></tr></thead><tbody>${gameHist.slice(0,8).map(h=>`<tr><td>${h.g}</td><td>${h.x}</td><td class="${h.t==='w'?'wtd':'ltd'}">${h.t==='w'?'+':'-'}${f2(h.a)}</td></tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--mu);padding:12px">Play some games first!</td></tr>'}</tbody></table></div>`;}
 // HIST
 function renderH(id,game){const el=$(id);const rows=gameHist.filter(h=>h.g===game).slice(0,8);el.innerHTML=rows.map(h=>`<div class="hi"><div class="hb ${h.t}">${h.t==='w'?'W':'L'}</div><div class="hi-info">${h.x}</div><div class="hi-amt ${h.t}">${h.t==='w'?'+':'-'}${f2(h.a)}</div></div>`).join('');}
 // FAKE ACTIVITY
 const FN=['Alex_K','CryptoW','Bet_Pro','DiamondH','NightB','LuckGod','RushB','TopG','FlashG','GoldR','SlimS','BabyC','StarK','VipPro','HighR'];
-const FA={Mines:()=>{const g=Math.floor(Math.random()*8)+1,m=(1.1+Math.random()*12).toFixed(2),w=Math.random()>.38;return{x:g+' gems ×'+m,a:rnd(Math.random()*400+5),t:w?'w':'l'};},Crash:()=>{const m=(1.05+Math.random()*28).toFixed(2),w=Math.random()>.42;return{x:'×'+m,a:rnd(Math.random()*600+10),t:w?'w':'l'};},Slots:()=>{const s=['🍒🍒🍒','⭐⭐⭐','💎💎💎','7️⃣7️⃣7️⃣','🔔🍊🍋'],w=Math.random()>.5;return{x:s[Math.floor(Math.random()*s.length)],a:rnd(Math.random()*250+5),t:w?'w':'l'};},Blackjack:()=>{const p=Math.floor(Math.random()*9)+13,d=Math.floor(Math.random()*9)+13,w=Math.random()>.45;return{x:p+' vs '+d,a:rnd(Math.random()*200+10),t:w?'w':'l'};},Dice:()=>{const r=(Math.random()*100).toFixed(2),t=Math.floor(Math.random()*60)+20,w=Math.random()>.48;return{x:r+(w?' > ':' < ')+t,a:rnd(Math.random()*300+5),t:w?'w':'l'};},Plinko:()=>{const ms=[.3,.5,1,1.4,2,5,10,22],m=ms[Math.floor(Math.random()*ms.length)];return{x:m+'× drop',a:rnd(Math.random()*180+5),t:m>=1?'w':'l'};}};
-const AH={Mines:'mHist',Crash:'cHist',Slots:'sHist',Blackjack:'bjHist',Dice:'dHist',Plinko:'plHist'};
+const FA={Mines:()=>{const g=Math.floor(Math.random()*8)+1,m=(1.1+Math.random()*12).toFixed(2),w=Math.random()>.38;return{x:g+' gems ×'+m,a:rnd(Math.random()*400+5),t:w?'w':'l'};},Crash:()=>{const m=(1.05+Math.random()*28).toFixed(2),w=Math.random()>.42;return{x:'×'+m,a:rnd(Math.random()*600+10),t:w?'w':'l'};},Slots:()=>{const s=['🍒🍒🍒','⭐⭐⭐','💎💎💎','7️⃣7️⃣7️⃣','🔔🍊🍋'],w=Math.random()>.5;return{x:s[Math.floor(Math.random()*s.length)],a:rnd(Math.random()*250+5),t:w?'w':'l'};},Blackjack:()=>{const p=Math.floor(Math.random()*9)+13,d=Math.floor(Math.random()*9)+13,w=Math.random()>.45;return{x:p+' vs '+d,a:rnd(Math.random()*200+10),t:w?'w':'l'};},Dice:()=>{const r=(Math.random()*100).toFixed(2),t=Math.floor(Math.random()*60)+20,w=Math.random()>.48;return{x:r+(w?' > ':' < ')+t,a:rnd(Math.random()*300+5),t:w?'w':'l'};}};
+const AH={Mines:'mHist',Crash:'cHist',Slots:'sHist',Blackjack:'bjHist',Dice:'dHist'};
 function injectFake(game){const el=$(AH[game]);if(!el)return;const d=FA[game]();const n=FN[Math.floor(Math.random()*FN.length)];const div=document.createElement('div');div.className='hi';div.style.cssText='animation:fir .3s ease;border-left:2px solid '+(d.t==='w'?'rgba(62,196,90,.4)':'rgba(239,68,68,.35)');div.innerHTML=`<div class="hb ${d.t}" style="font-size:7px;min-width:26px">${n.slice(0,3)}</div><div class="hi-info" style="color:var(--mu2)">${d.x}</div><div class="hi-amt ${d.t}">${d.t==='w'?'+':'-'}${f2(d.a)}</div>`;el.insertBefore(div,el.firstChild);while(el.children.length>12)el.removeChild(el.lastChild);}
 const fakeCSS=document.createElement('style');fakeCSS.textContent='@keyframes fir{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}';document.head.appendChild(fakeCSS);
 setTimeout(()=>{Object.keys(FA).forEach(g=>{for(let i=0;i<5;i++)injectFake(g);});},600);
@@ -1136,72 +1141,10 @@ async function rollDice(){if(dRolling)return;const bet=gbet('db');if(bet<=0||bet
   if(win){const pr=rnd(bet*mult-bet);bal+=rnd(bet*mult);updBal();gameHist.unshift({g:'Dice',t:'w',a:pr,x:roll.toFixed(2)+' '+(dDir_==='over'?'>':'<')+t});dw('win','Dice',bet,pr,roll.toFixed(2));toast('🎲 +'+f2(pr),'wt');}
   else{gameHist.unshift({g:'Dice',t:'l',a:-bet,x:roll.toFixed(2)+' '+(dDir_==='over'?'>':'<')+t});dw('lose','Dice',bet,-bet,roll.toFixed(2));toast('🎲 Miss','lt');}
   renderH('dHist','Dice');setTimeout(()=>{dRolling=false;$('dBtn').disabled=false;},300);}
-// PLINKO
-const PL_PAYS={low:{8:[5.6,2.1,1.1,.9,.7,.9,1.1,2.1,5.6],10:[8.9,3,1.4,1.1,.8,.5,.8,1.1,1.4,3,8.9],12:[10,3,1.6,1.4,1.1,.6,.3,.6,1.1,1.4,1.6,3,10],16:[16,9,2,1.4,1.4,1.2,1.1,.5,.3,.5,1.1,1.2,1.4,1.4,2,9,16]},med:{8:[13,3,1.3,.7,.4,.7,1.3,3,13],10:[22,5,2,1.4,.6,.4,.6,1.4,2,5,22],12:[33,11,4,2,1.1,.6,.3,.3,.6,1.1,2,4,11,33],16:[110,41,10,5,3,1.5,1,.5,.3,.5,1,1.5,3,5,10,41,110]},high:{8:[29,4,1.5,.3,.2,.3,1.5,4,29],10:[76,10,3,1,.4,.2,.4,1,3,10,76],12:[170,24,8.1,2,.7,.2,.2,.2,.7,2,8.1,24,170],16:[1000,130,26,9,4,2,0.2,0.2,0.2,0.2,0.2,2,4,9,26,130,1000]}};
-let plCtx=null,plPins=[],plBalls=[],plRaf=null,plTW=0;
-function plInit(){
-  const cv=$('plCv');if(!cv)return;
-  const wrap=$('plWrap');if(!wrap)return;
-  // Force wrap to have explicit height if needed
-  if(!wrap.style.height)wrap.style.height='100%';
-  const W=wrap.offsetWidth,H=wrap.offsetHeight;
-  if(W<10){setTimeout(plInit,100);return;}
-  const H2=Math.max(H||300,260);
-  cv.width=W;cv.height=H2;
-  plCtx=cv.getContext('2d');
-  plBuildPins();
-}
-function plBuildPins(){
-  if(!plCtx)return;const cv=$('plCv');
-  plPins=[];
-  const rows=parseInt($('plRows').value)||10;
-  const W=cv.width,H=cv.height;
-  const gx=Math.min(34,Math.floor((W-40)/(rows+2)));
-  const gy=Math.floor((H-80)/(rows+1));
-  for(let r=0;r<rows;r++){const cols=r+3;const rw=(cols-1)*gx;const sx=(W-rw)/2;for(let c=0;c<cols;c++)plPins.push({x:sx+c*gx,y:36+r*gy});}
-  plBuildBuckets();
-  if(!plRaf)plLoop();
-}
-function plBuildBuckets(){
-  const el=$('plBuckets');if(!el)return;
-  const risk=$('plRisk').value||'med';const rows=parseInt($('plRows').value)||10;
-  const pays=PL_PAYS[risk][rows]||PL_PAYS.med[10];const maxP=Math.max(...pays);
-  el.innerHTML='';
-  pays.forEach(p=>{const div=document.createElement('div');div.className='pb';const rt=Math.sqrt(p/maxP);const r=Math.round(255*Math.min(1,rt*1.6)),g=Math.round(180*(1-rt));div.style.cssText=`background:rgba(${r},${g},20,.4);border:1px solid rgba(${r},${g},20,.65);color:rgb(${Math.min(255,r+50)},${Math.min(220,g+50)},40)`;div.textContent=p+'×';el.appendChild(div);});
-}
-function plDraw(){
-  if(!plCtx)return;const cv=$('plCv');plCtx.clearRect(0,0,cv.width,cv.height);
-  plPins.forEach(p=>{plCtx.beginPath();plCtx.arc(p.x,p.y,4.5,0,Math.PI*2);plCtx.fillStyle='rgba(180,195,255,.8)';plCtx.fill();plCtx.strokeStyle='rgba(100,120,220,.3)';plCtx.lineWidth=1;plCtx.stroke();});
-  plBalls.forEach(b=>{if(!b.alive)return;const g=plCtx.createRadialGradient(b.x-1,b.y-1,1,b.x,b.y,b.r);g.addColorStop(0,b.c2);g.addColorStop(1,b.c1);plCtx.beginPath();plCtx.arc(b.x,b.y,b.r,0,Math.PI*2);plCtx.fillStyle=g;plCtx.fill();plCtx.strokeStyle=b.cs;plCtx.lineWidth=1.5;plCtx.stroke();});
-}
-function plLoop(){
-  plRaf=requestAnimationFrame(plLoop);if(!plCtx)return;
-  const cv=$('plCv'),H=cv.height,W=cv.width;
-  plBalls.forEach(b=>{
-    if(!b.alive)return;b.vy+=.26;b.vx*=.996;b.x+=b.vx;b.y+=b.vy;
-    if(b.x<b.r){b.x=b.r;b.vx=Math.abs(b.vx)*.7;}if(b.x>W-b.r){b.x=W-b.r;b.vx=-Math.abs(b.vx)*.7;}
-    plPins.forEach(pin=>{const dx=b.x-pin.x,dy=b.y-pin.y,d=Math.sqrt(dx*dx+dy*dy),md=b.r+5;if(d<md&&d>0){const nx=dx/d,ny=dy/d,dot=b.vx*nx+b.vy*ny;b.vx=b.vx-2*dot*nx+(Math.random()-.5)*1.5;b.vy=Math.abs(b.vy-2*dot*ny)*.65+Math.random()*.4;b.x=pin.x+nx*(md+.5);b.y=pin.y+ny*(md+.5);}});
-    if(b.y>=H-44){
-      b.alive=false;
-      const risk=$('plRisk').value||'med';const rows=parseInt($('plRows').value)||10;const pays=PL_PAYS[risk][rows]||PL_PAYS.med[10];
-      let idx=Math.floor(b.x/W*pays.length);idx=Math.max(0,Math.min(pays.length-1,idx));
-      let mult=pays[idx];if(b.isPlayer&&cheatOn&&shouldWin()){const sorted=[...pays].sort((a,z)=>a-z);mult=sorted[Math.floor(sorted.length*.65)];}
-      const win=rnd(b.bet*mult),pr=rnd(win-b.bet);
-      if(b.isPlayer){bal+=win;updBal();addWager(b.bet);plTW+=Math.max(0,pr);$('plLW').textContent=mult+'×';$('plTW').textContent='$'+plTW.toFixed(2);gameHist.unshift({g:'Plinko',t:pr>=0?'w':'l',a:pr,x:mult+'× — '+f2(win)});renderH('plHist','Plinko');dw(pr>=0?'win':'lose','Plinko',b.bet,pr,mult+'×');toast('🔵 ×'+mult+' '+(pr>=0?'+':'')+f2(pr),pr>=0?'wt':'lt');$('plBtn').disabled=false;const bks=$('plBuckets').children;if(bks[idx]){bks[idx].style.transform='scale(1.2)';bks[idx].style.filter='brightness(1.7)';setTimeout(()=>{bks[idx].style.transform='';bks[idx].style.filter='';},320);}}
-    }
-  });
-  plBalls=plBalls.filter(b=>b.alive);plDraw();
-}
-function plDrop(){
-  const bet=gbet('plb');if(bet<=0||bet>bal){shake($('plb'));toast('Invalid bet','lt');return;}
-  if(!plCtx){plInit();setTimeout(()=>{if(plCtx)plDrop();else toast('Click Drop Ball again','it');},200);return;}
-  bal-=bet;updBal();$('plBtn').disabled=true;const cv=$('plCv');
-  plBalls.push({x:cv.width/2+(Math.random()-.5)*8,y:8,vx:(Math.random()-.5)*1.8,vy:1.5,r:7,alive:true,isPlayer:true,bet:bet,c1:'#4338ca',c2:'#818cf8',cs:'rgba(129,140,248,.7)'});
-}
-setInterval(()=>{if(plCtx){const cv=$('plCv');const cols=[['#7c3aed','#c4b5fd','rgba(124,58,237,.4)'],['#0f766e','#5eead4','rgba(15,118,110,.4)'],['#b45309','#fcd34d','rgba(180,83,9,.4)']];const [c1,c2,cs]=cols[Math.floor(Math.random()*cols.length)];plBalls.push({x:cv.width/2+(Math.random()-.5)*60,y:8,vx:(Math.random()-.5)*2.5,vy:1.5,r:5,alive:true,isPlayer:false,bet:rnd(Math.random()*80+5),c1,c2,cs});}},2500);
+
 // CHAT
 const CU=[{n:'Alex_K',v:'bronze',c:'#4f46e5'},{n:'CryptoW',v:'gold',c:'#f59e0b'},{n:'Bet_Pro',v:'silver',c:'#6366f1'},{n:'DiamondH',v:'diamond',c:'#22d3ee'},{n:'NightB',v:'bronze',c:'#9333ea'},{n:'LuckGod',v:'gold',c:'#f5a623'},{n:'RushB',v:'silver',c:'#10b981'},{n:'TopG',v:'diamond',c:'#ef4444'},{n:'FlashG',v:'bronze',c:'#3ec45a'},{n:'GoldR',v:'gold',c:'#f5a623'}];
-const CM=['big win on mines!! 🔥','crash ×23.4 lets go','hit 💎💎💎 on slots omg','crash going crazy rn','mines is my fav game 🎯','vaultbet GOATED 🏆','cashed ×15 on crash 😭','plinko 22x lets gooo','blackjack busted again 💀','who else grinding rn?','this site is actually legit','crash ×47 NO WAY 🚀','mines 5 gems 3 bombs','been here 3 hours lol','dice just hit 98.47 🎲','plinko so addictive wtf','hit blackjack 1.5x','rakeback dropped 💰','just lost everything rip','DIAMOND VIP lets go!!!','grinding for gold rank','crash ×2.1 caught it','slots 7️⃣7️⃣7️⃣ 25x LETS GO','plinko 10x in a row','anyone hitting big tonight?'];
+const CM=['big win on mines!! 🔥','crash ×23.4 lets go','hit 💎💎💎 on slots omg','crash going crazy rn','mines is my fav game 🎯','vaultbet GOATED 🏆','cashed ×15 on crash 😭','blackjack busted again 💀','who else grinding rn?','this site is actually legit','crash ×47 NO WAY 🚀','mines 5 gems 3 bombs','been here 3 hours lol','dice just hit 98.47 🎲','hit blackjack 1.5x','rakeback dropped 💰','just lost everything rip','DIAMOND VIP lets go!!!','grinding for gold rank','crash ×2.1 caught it','slots 7️⃣7️⃣7️⃣ 25x LETS GO','anyone hitting big tonight?'];
 function addChatMsg(name,vip,col,text,isMe=false){const el=$('chatMsgs');const div=document.createElement('div');div.className='cm';div.innerHTML=`<div class="cm-top"><div class="cm-ava" style="background:${isMe?'linear-gradient(135deg,#6366f1,#9333ea)':col}">${name[0]}</div><div class="cm-name" style="color:${isMe?'#818cf8':'inherit'}">${name}</div>${vip?`<div class="cm-vip ${vip}">${vip.toUpperCase()}</div>`:''}</div><div class="cm-txt">${text}</div>`;el.appendChild(div);el.scrollTop=el.scrollHeight;}
 function sendChat(){const inp=$('chatInp');const msg=inp.value.trim();if(!msg)return;addChatMsg('You','bronze','',msg,true);inp.value='';}
 (function chatBot(){setTimeout(()=>{const u=CU[Math.floor(Math.random()*CU.length)];addChatMsg(u.n,u.v,u.c,CM[Math.floor(Math.random()*CM.length)]);chatBot();},Math.random()*5000+2000);})();
@@ -1209,14 +1152,44 @@ for(let i=0;i<5;i++)setTimeout(()=>{const u=CU[Math.floor(Math.random()*CU.lengt
 setInterval(()=>{const o=Math.floor(Math.random()*80)+215;$('chatOnline').textContent=o+' online';},7000);
 // TICKER
 const TN=['Alex','CryptoW','Bet_Pro','xx_dark','LuckGod','NightB','RushB','DiamondH','TopG','SlimS','BabyC','BetKing','GoldR','SpeedR','LuckyJ','VipPro','HighR','NovaBet','StarK'];
-const TG=['Mines','Crash','Slots','Dice','Blackjack','Plinko'];
+const TG=['Mines','Crash','Slots','Dice','Blackjack'];
 function buildTicker(){const track=$('tickerInner');let html='';const items=[];for(let i=0;i<22;i++){const n=TN[Math.floor(Math.random()*TN.length)],g=TG[Math.floor(Math.random()*TG.length)],w=Math.random()>.35,a=rnd(Math.random()*2000+5);items.push({n,g,w,a});}[...items,...items].forEach(it=>{html+=`<div class="ti"><span class="ti-n">${it.n}</span><span class="ti-g">${it.g}</span><span class="ti-a ${it.w?'w':'l'}">${it.w?'+':'-'}${f2(it.a)}</span></div>`;});track.innerHTML=html;}
 buildTicker();setInterval(()=>{const items=document.querySelectorAll('.ti');if(items.length){const it=items[Math.floor(Math.random()*Math.min(items.length,11))];if(it){it.querySelector('.ti-n').textContent=TN[Math.floor(Math.random()*TN.length)];it.querySelector('.ti-g').textContent=TG[Math.floor(Math.random()*TG.length)];const w=Math.random()>.35,a=rnd(Math.random()*2000+5);const ta=it.querySelector('.ti-a');ta.textContent=(w?'+':'-')+f2(a);ta.className='ti-a '+(w?'w':'l');}}},2000);
 // DEPOSIT MODAL
 let depStep=0,depAmt=10,depMeth='apple';
-function openMod(type){if(type==='dep'){depStep=0;depAmt=10;depMeth='apple';goDS(0);document.querySelectorAll('.ag').forEach(b=>b.classList.remove('sel'));document.querySelectorAll('#dS0 .ag')[0].classList.add('sel');$('custAmt').value='';selMeth($('mA'),'apple');$('depOv').classList.add('show');}else{$('wdAvail').textContent=f2(bal);for(let i=0;i<3;i++){const s=$('wS'+i);if(s){s.classList.remove('on');}}$('wS0').classList.add('on');document.querySelectorAll('[id^="w"]:not([id^="wdA"]):not([id^="wdC"]):not([id^="wdP"]):not([id^="wdR"]):not([id^="wdS"])').forEach(m=>{if(m.classList&&m.classList.contains('meth'))m.classList.remove('sel');});const wB=$('wB');if(wB){wB.classList.add('sel');wB.querySelector('.meth-chk').textContent='✓';}$('wdBankF').style.display='flex';$('wdCryptoF').style.display='none';$('wdOv').classList.add('show');}}
+function openMod(type){
+  if(type==='dep'){
+    depStep=0;depAmt=10;depMeth='apple';
+    for(let i=0;i<4;i++){const s=document.getElementById('dS'+i);if(s){s.classList.remove('on');s.style.display='none';}}
+    const s0=document.getElementById('dS0');if(s0){s0.classList.add('on');s0.style.display='flex';}
+    document.querySelectorAll('#dS0 .ag').forEach(b=>b.classList.remove('sel'));
+    const fa=document.querySelector('#dS0 .ag');if(fa)fa.classList.add('sel');
+    const cu=document.getElementById('custAmt');if(cu)cu.value='';
+    const mA2=document.getElementById('mA');if(mA2)selMeth(mA2,'apple');
+    const dt=document.getElementById('depTitle');if(dt)dt.textContent='Deposit';
+    const dx=document.getElementById('depX');if(dx)dx.style.display='';
+    document.getElementById('depOv').classList.add('show');
+  }else{
+    document.getElementById('wdAvail').textContent=f2(bal);
+    for(let i=0;i<3;i++){const s=document.getElementById('wS'+i);if(s){s.classList.remove('on');s.style.display='none';}}
+    const ws=document.getElementById('wS0');if(ws){ws.classList.add('on');ws.style.display='flex';}
+    document.querySelectorAll('#wS0 .meth').forEach(m=>{m.classList.remove('sel');const k=m.querySelector('.meth-chk');if(k)k.textContent='';});
+    const wb=document.getElementById('wB');if(wb){wb.classList.add('sel');const k=wb.querySelector('.meth-chk');if(k)k.textContent='✓';}
+    const wbf=document.getElementById('wdBankF');if(wbf)wbf.style.display='flex';
+    const wcf=document.getElementById('wdCryptoF');if(wcf)wcf.style.display='none';
+    document.getElementById('wdOv').classList.add('show');
+  }
+}
 function closeMod(type){if(type==='dep'&&depStep===2)return;$(type==='dep'?'depOv':'wdOv').classList.remove('show');}
-function goDS(n){depStep=n;for(let i=0;i<4;i++){const s=$('dS'+i);if(s)s.classList.remove('on');}$('dS'+n).classList.add('on');const titles=['Deposit','Payment Method','Processing…','Success!'];$('depTitle').textContent=titles[n];$('depX').style.display=n===2?'none':'';}
+function goDS(n){
+  depStep=n;
+  for(let i=0;i<4;i++){const s=document.getElementById('dS'+i);if(s){s.classList.remove('on');s.style.display='none';}}
+  const sn=document.getElementById('dS'+n);if(sn){sn.classList.add('on');sn.style.display='flex';}
+  const titles=['Deposit','Payment Method','Processing…','Success!'];
+  const dt=document.getElementById('depTitle');if(dt)dt.textContent=titles[n];
+  const dx=document.getElementById('depX');if(dx)dx.style.display=n===2?'none':'';
+  if(n===1){const pl=document.getElementById('pmLbl');if(pl)pl.textContent=f2(depAmt);}
+}
 function selAmt(el,v){document.querySelectorAll('#dS0 .ag').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');depAmt=v;$('custAmt').value='';}
 function custAmt_(el){const v=parseFloat(el.value)||0;if(v>0){depAmt=v;document.querySelectorAll('#dS0 .ag').forEach(b=>b.classList.remove('sel'));}}
 function selMeth(el,name){document.querySelectorAll('#dS1 .meth').forEach(m=>{m.classList.remove('sel');m.querySelector('.meth-chk').textContent='';});el.classList.add('sel');el.querySelector('.meth-chk').textContent='✓';depMeth=name;$('cardF').style.display=name==='card'?'flex':'none';}
@@ -1248,7 +1221,6 @@ window.cHandle=cHandle;
 window.spinSlots=spinSlots;
 window.bjDeal=bjDeal;window.bjHit=bjHit;window.bjStand=bjStand;window.bjDouble=bjDouble;window.bjReset=bjReset;
 window.rollDice=rollDice;window.dDir=dDir;window.dCalc=dCalc;
-window.plDrop=plDrop;
 window.profTab=profTab;
 window.openPin=openPin;window.closePin=closePin;window.pk=pk;window.closeCheat=closeCheat;
 window.selAmt=selAmt;window.custAmt_=custAmt_;window.selMeth=selMeth;window.fmtCard=fmtCard;window.fmtExp=fmtExp;window.startDep=startDep;
@@ -1347,25 +1319,29 @@ window.doLogin=async function(){
 // ── Load user data from Firestore ──
 async function _loadUser(uid){
   try{
+    console.log('📂 Loading user:',uid);
     const snap=await getDoc(doc(db,'users',uid));
     if(snap.exists()){
       const d=snap.data();
+      console.log('✅ Loaded data:',JSON.stringify(d));
       currentUsername=d.username||'Player';
       bal=Number(d.balance)||0;
       xp=Number(d.xp)||0;
       totalWag=Number(d.totalWagered)||0;
       totalRB=Number(d.totalRakeback)||0;
-      // load history
+      // load history (requires Firestore index - see console if it fails)
       try{
         const hs=await getDocs(query(collection(db,'game_history'),where('userId','==',uid),orderBy('createdAt','desc'),limit(50)));
         gameHist=hs.docs.map(d2=>({g:d2.data().g||'',t:d2.data().t||'l',a:Number(d2.data().a)||0,x:d2.data().x||''}));
-      }catch(_){gameHist=[];}
+        console.log('📜 History:',gameHist.length,'entries');
+      }catch(he){console.warn('History query failed:',he.message);gameHist=[];}
     }else{
+      console.warn('⚠️ No user doc - new account');
       bal=0;xp=0;totalWag=0;totalRB=0;gameHist=[];
     }
     updBal();updVIP();updBonuses();updCheat();
   }catch(e){
-    console.warn('loadUser error:',e);
+    console.error('❌ LOAD ERROR:',e.code,e.message);
     bal=0;xp=0;updBal();updVIP();
   }
 }
@@ -1381,7 +1357,8 @@ function _scheduleSave(){
 async function _saveNow(){
   if(!currentUser)return;
   try{
-    await updateDoc(doc(db,'users',currentUser.uid),{
+    // Use setDoc with merge:true so it works even if doc missing
+    await setDoc(doc(db,'users',currentUser.uid),{
       balance:Math.round(bal*100)/100,
       xp:Math.round(xp),
       totalWagered:Math.round(totalWag*100)/100,
@@ -1390,8 +1367,9 @@ async function _saveNow(){
       gamesWon:gameHist.filter(h=>h.t==='w').length,
       gamesLost:gameHist.filter(h=>h.t==='l').length,
       lastSeen:serverTimestamp()
-    });
-  }catch(e){console.warn('save error:',e);}
+    },{merge:true});
+    console.log('✅ Saved: bal='+bal+' xp='+xp);
+  }catch(e){console.error('❌ SAVE FAILED:',e.code,e.message);}
 }
 
 // ── Save a game result to Firestore ──
@@ -1420,26 +1398,36 @@ window.doLogout=async function(){
 function _updateNavBadge(){
   if(!currentUser||!currentUsername)return;
   const init=currentUsername.slice(0,2).toUpperCase();
-  // find avatar element
   const ava=document.querySelector('.ava');
   const target=ava||document.querySelector('.user-badge');
   if(!target)return;
-  target.outerHTML=`<div class="user-badge" id="userBadge">
+  target.outerHTML=`<div class="user-badge" id="userBadge" onclick="toggleUserMenu(event)">
     <div class="user-ava">${init}</div>
     <div class="user-name">${currentUsername}</div>
-    <div class="user-menu">
-      <button class="um-item" onclick="openPage('profile',null)">👤 My Profile</button>
-      <button class="um-item" onclick="openMod('dep')">💰 Deposit</button>
-      <button class="um-item" onclick="openMod('wd')">📤 Withdraw</button>
-      <div style="height:1px;background:var(--b1);margin:3px 0"></div>
-      <button class="um-item red" onclick="doLogout()">🚪 Sign Out</button>
+    <span style="font-size:9px;color:var(--mu2);margin-left:2px">▾</span>
+    <div class="user-menu" id="userMenu">
+      <div class="um-username"><div class="user-ava" style="width:20px;height:20px;font-size:9px">${init}</div><div><div style="font-size:11px;font-weight:700;color:#fff">${currentUsername}</div><div style="font-size:9px;color:var(--mu2)">${currentUser.email||''}</div></div></div>
+      <button class="um-item" onclick="event.stopPropagation();closeUserMenu();openPage('profile',null)">👤 My Profile</button>
+      <button class="um-item" onclick="event.stopPropagation();closeUserMenu();openMod('dep')">💰 Deposit</button>
+      <button class="um-item" onclick="event.stopPropagation();closeUserMenu();openMod('wd')">📤 Withdraw</button>
+      <div class="um-sep"></div>
+      <button class="um-item red" onclick="event.stopPropagation();doLogout()">🚪 Sign Out</button>
     </div>
   </div>`;
-  // update profile sidebar
   const pa=document.querySelector('.prof-ava');if(pa)pa.textContent=init;
   const pn=document.querySelector('.prof-name');if(pn)pn.textContent=currentUsername;
   const pe=document.querySelector('.prof-email');if(pe&&currentUser.email)pe.textContent=currentUser.email;
 }
+function toggleUserMenu(e){
+  e.stopPropagation();
+  const m=document.getElementById('userMenu');
+  if(m)m.classList.toggle('open');
+}
+function closeUserMenu(){
+  const m=document.getElementById('userMenu');
+  if(m)m.classList.remove('open');
+}
+document.addEventListener('click',()=>closeUserMenu());
 
 // ── Hook addWager to trigger save after every bet ──
 const __aw=addWager;
@@ -1479,24 +1467,176 @@ startWd=function(){__sw();setTimeout(_scheduleSave,3500);};
 $('authOv').style.display='flex';
 updCheat();
 
-// Plinko retry init
-function tryPlInit(){const w=$('plWrap');if(w&&w.offsetWidth>10)plInit();else setTimeout(tryPlInit,200);}
 
-// Override navTo to init plinko
-const __nt=navTo;
-navTo=function(name,el){__nt(name,el);if(name==='plinko')setTimeout(tryPlInit,80);};
-window.navTo=navTo;
 
 // Expose Firebase auth functions to window so HTML onclick works
 window.switchTab=switchTab;
 window.doLogin=doLogin;
 window.doRegister=doRegister;
 window.doLogout=doLogout;
+window.toggleUserMenu=toggleUserMenu;
+window.closeUserMenu=closeUserMenu;
 
 document.addEventListener('keydown',e=>{
   if(e.ctrlKey&&e.shiftKey&&e.key==='B'){e.preventDefault();openMod('dep');}
   if(e.ctrlKey&&e.shiftKey&&e.key==='A'){e.preventDefault();openPin();}
 });
+
+// ═══════════════════════════════════════════════════════
+// LIVE CHAT via Firestore
+// ═══════════════════════════════════════════════════════
+let chatUnsub=null;
+
+function startLiveChat(){
+  if(chatUnsub)chatUnsub();
+  const q=query(collection(db,'chat'),orderBy('ts','asc'),limit(80));
+  chatUnsub=onSnapshot(q,function(snap){
+    const el=document.getElementById('chatMsgs');
+    if(!el)return;
+    el.innerHTML='';
+    snap.docs.forEach(function(d){
+      const msg=d.data();
+      const isMe=currentUser&&msg.uid===currentUser.uid;
+      const tier=msg.tier||'bronze';
+      const bgColor=isMe?'linear-gradient(135deg,#6366f1,#9333ea)':(msg.color||'#4f46e5');
+      const nameColor=isMe?'#818cf8':'inherit';
+      const initial=(msg.name||'?').charAt(0);
+      const div=document.createElement('div');
+      div.className='cm';
+      div.innerHTML='<div class="cm-top">'
+        +'<div class="cm-ava" style="background:'+bgColor+'">'+initial+'</div>'
+        +'<div class="cm-name" style="color:'+nameColor+'">'+( msg.name||'Player')+'</div>'
+        +'<div class="cm-vip '+tier+'">'+tier.toUpperCase()+'</div>'
+        +'</div>'
+        +'<div class="cm-txt">'+((msg.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+'</div>';
+      el.appendChild(div);
+    });
+    el.scrollTop=el.scrollHeight;
+  });
+}
+
+window.sendChat=async function(){
+  const inp=document.getElementById('chatInp');
+  if(!inp)return;
+  const msg=inp.value.trim();
+  if(!msg||!currentUser)return;
+  inp.value='';
+  const tier=getTier().name.toLowerCase();
+  try{
+    await addDoc(collection(db,'chat'),{
+      uid:currentUser.uid,
+      name:currentUsername||'Player',
+      text:msg,
+      tier:tier,
+      color:'#6366f1',
+      ts:serverTimestamp()
+    });
+  }catch(e){console.warn('chat error:',e);}
+};
+
+// ═══════════════════════════════════════════════════════
+// GLOBAL RIGGING via Firestore (admin controls affect all players)
+// ═══════════════════════════════════════════════════════
+let globalRig={on:false,winRate:50,boost:1,depEnabled:true};
+let globalRigUnsub=null;
+
+function listenGlobalRig(){
+  if(globalRigUnsub)globalRigUnsub();
+  globalRigUnsub=onSnapshot(doc(db,'admin','globalRig'),(snap)=>{
+    if(snap.exists()){
+      const d=snap.data();
+      globalRig.on=d.on||false;
+      globalRig.winRate=d.winRate??50;
+      globalRig.boost=d.boost||1;
+      globalRig.depEnabled=d.depEnabled!==false;
+    }
+  });
+}
+
+// Override shouldWin to also check global rig
+const _localShouldWin=shouldWin;
+shouldWin=function(){
+  // local admin cheat takes priority
+  if(cheatOn)return _localShouldWin();
+  // then global rig
+  if(globalRig.on)return Math.random()*100<globalRig.winRate;
+  return Math.random()<0.5;
+};
+
+// Override deposit to check if enabled
+const _openModOrig=openMod;
+openMod=function(type){
+  if(type==='dep'&&!globalRig.depEnabled){
+    toast('⚠️ Deposits are temporarily disabled','lt');return;
+  }
+  _openModOrig(type);
+};
+window.openMod=openMod;
+
+// ═══════════════════════════════════════════════════════
+// ADMIN CHEAT PANEL: Global rig controls
+// ═══════════════════════════════════════════════════════
+window.saveGlobalRig=async function(){
+  const on=document.getElementById('gRigOn')&&document.getElementById('gRigOn').checked||false;
+  const wr=parseInt(document.getElementById('gWinRate')&&document.getElementById('gWinRate').value)||50;
+  const dep=document.getElementById('gDepEnabled')&&document.getElementById('gDepEnabled').checked!==false;
+  try{
+    await setDoc(doc(db,'admin','globalRig'),{on,winRate:wr,depEnabled:dep,boost:1},{merge:true});
+    toast('✅ Global rig saved','it');
+  }catch(e){toast('Error: '+e.message,'lt');}
+};
+
+// ═══════════════════════════════════════════════════════
+// HOOK onAuthStateChanged to start live systems after login
+// ═══════════════════════════════════════════════════════
+// We re-trigger these after user loads
+const _origHideAuth=_hideAuth;
+// Patch the onAuthStateChanged callback to also start live chat and global rig
+// This is done by listening after _loadUser completes
+const __origLoadUser=_loadUser;
+_loadUser=async function(uid){
+  await __origLoadUser(uid);
+  startLiveChat();
+  listenGlobalRig();
+};
+
+// ─── ADMIN: Add balance to any user by UID or email ───
+window.adminAddBalance=async function(){
+  const target=document.getElementById('adminTarget').value.trim();
+  const amt=parseFloat(document.getElementById('adminAmt').value)||0;
+  const res=document.getElementById('adminResult');
+  if(!target){res.style.color='var(--redh)';res.textContent='Enter a UID or email';return;}
+  if(amt<=0){res.style.color='var(--redh)';res.textContent='Enter a valid amount';return;}
+  res.style.color='var(--mu2)';res.textContent='Searching...';
+  try{
+    let userId=null;
+    // If it looks like a UID (no @ sign), use directly
+    if(!target.includes('@')){
+      userId=target;
+    }else{
+      // Search by email in users collection
+      const q=await getDocs(query(collection(db,'users'),where('email','==',target),limit(1)));
+      if(q.empty){res.style.color='var(--redh)';res.textContent='No user found with that email';return;}
+      userId=q.docs[0].id;
+    }
+    // Get current balance
+    const snap=await getDoc(doc(db,'users',userId));
+    if(!snap.exists()){res.style.color='var(--redh)';res.textContent='User document not found';return;}
+    const curBal=Number(snap.data().balance)||0;
+    const newBal=Math.round((curBal+amt)*100)/100;
+    await setDoc(doc(db,'users',userId),{balance:newBal},{merge:true});
+    res.style.color='var(--gh)';
+    res.textContent='✅ Done! '+snap.data().username+' now has $'+newBal.toFixed(2);
+    document.getElementById('adminTarget').value='';
+    document.getElementById('adminAmt').value='';
+    // Log to Discord
+    dw('deposit','Admin Add Balance',amt,amt,'Admin gave '+f2(amt)+' to '+(snap.data().username||userId));
+  }catch(e){
+    res.style.color='var(--redh)';
+    res.textContent='Error: '+e.message;
+    console.error('adminAddBalance:',e);
+  }
+};
 </script>
 </body>
 </html>
