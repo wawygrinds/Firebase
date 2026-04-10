@@ -1,1 +1,167 @@
-# Firebase
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Register</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 350px;
+      text-align: center;
+    }
+    h2 { margin-bottom: 20px; color: #333; }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #1877f2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover { background: #166fe5; }
+    .toggle { margin-top: 15px; color: #1877f2; cursor: pointer; }
+    .toggle:hover { text-decoration: underline; }
+    .message { margin-top: 15px; padding: 10px; border-radius: 5px; font-size: 14px; }
+    .success { background: #d4edda; color: #155724; }
+    .error { background: #f8d7da; color: #721c24; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2 id="form-title">Register</h2>
+
+    <form id="auth-form">
+      <input type="text" id="username" placeholder="Username (optional)">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password (min 6 characters)" required minlength="6">
+      <button type="submit" id="submit-btn">Register</button>
+    </form>
+
+    <p class="toggle" id="toggle-link">Already have an account? Login</p>
+    <div id="message" class="message" style="display: none;"></div>
+  </div>
+
+  <!-- Firebase SDK - Modern Modular (v12) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+
+    // Your Firebase config (exactly as Firebase gave you)
+    const firebaseConfig = {
+      apiKey: "AIzaSyDAEBKvhpVZWWHyA7_yZ1EZnHPAOk4NX8U",
+      authDomain: "login-main-a2f3f.firebaseapp.com",
+      projectId: "login-main-a2f3f",
+      storageBucket: "login-main-a2f3f.firebasestorage.app",
+      messagingSenderId: "47225085770",
+      appId: "1:47225085770:web:02ced1fc8611491e2c6bb3",
+      measurementId: "G-PB8R1YFQSG"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Form elements
+    const form = document.getElementById('auth-form');
+    const title = document.getElementById('form-title');
+    const submitBtn = document.getElementById('submit-btn');
+    const toggleLink = document.getElementById('toggle-link');
+    const messageDiv = document.getElementById('message');
+
+    let isRegister = true;
+
+    // Toggle between Register and Login
+    toggleLink.addEventListener('click', () => {
+      isRegister = !isRegister;
+      title.textContent = isRegister ? 'Register' : 'Login';
+      submitBtn.textContent = isRegister ? 'Register' : 'Login';
+      toggleLink.textContent = isRegister 
+        ? 'Already have an account? Login' 
+        : "Don't have an account? Register";
+      messageDiv.style.display = 'none';
+    });
+
+    // Handle form submit
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const username = document.getElementById('username').value.trim() || email.split('@')[0];
+
+      if (!email || !password) {
+        showMessage('Email and password are required', 'error');
+        return;
+      }
+
+      try {
+        if (isRegister) {
+          // Register new user
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          await updateProfile(userCredential.user, { displayName: username });
+
+          showMessage('Registration successful! You can now login from any device.', 'success');
+
+          // Auto switch to login mode
+          setTimeout(() => {
+            isRegister = false;
+            title.textContent = 'Login';
+            submitBtn.textContent = 'Login';
+            toggleLink.textContent = "Don't have an account? Register";
+            form.reset();
+          }, 1800);
+
+        } else {
+          // Login existing user
+          const userCredential = await signInWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+
+          showMessage(`Welcome back, ${user.displayName || user.email}! 🎉`, 'success');
+
+          setTimeout(() => {
+            alert(`You are now logged in as ${user.email}\n\nData is saved securely on Firebase servers.`);
+          }, 800);
+        }
+      } catch (error) {
+        console.error(error);
+        let msg = error.message;
+        if (error.code === 'auth/email-already-in-use') msg = 'This email is already registered!';
+        if (error.code === 'auth/weak-password') msg = 'Password must be at least 6 characters long.';
+        if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') msg = 'Invalid email or password.';
+        showMessage(msg, 'error');
+      }
+    });
+
+    function showMessage(text, type) {
+      messageDiv.textContent = text;
+      messageDiv.className = `message ${type}`;
+      messageDiv.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
