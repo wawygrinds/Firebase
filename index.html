@@ -777,14 +777,14 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
     <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#1a0a0a,#4a1010)"><div class="bc-tag hot">🔥 HOT</div><div class="bcard-title">Daily Rakeback</div><div class="bcard-desc">Earn back a % of every bet daily</div></div><div class="bcard-body"><div class="bc-val" id="rbAmt">$0.00</div><button class="bc-btn" id="rbBtn" onclick="claimRakeback()">Claim Rakeback</button></div></div>
     <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#1a1200,#4a3500)"><div class="bc-tag ex">EXCLUSIVE</div><div class="bcard-title">Promo Code</div><div class="bcard-desc">Enter your exclusive code for a balance boost</div></div><div class="bcard-body"><div class="bc-val">???</div><div class="promo-row"><input class="promo-inp" id="promoInp" placeholder="Enter code..."><button class="promo-apply" onclick="claimPromo()">Apply</button></div></div></div>
     <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#0a0a2e,#1a1a6e)"><div class="bc-tag vip">VIP</div><div class="bcard-title">Weekly Reload</div><div class="bcard-desc">Silver+ get 15% weekly reload bonus</div></div><div class="bcard-body"><div class="bc-val">+15%</div><button class="bc-btn claimed">Requires Silver VIP</button></div></div>
-    <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#0a1a2e,#0f3a5e)"><div class="bc-tag new">DAILY</div><div class="bcard-title">Free Spins</div><div class="bcard-desc">10 free spins on Slots every 24 hours</div></div><div class="bcard-body"><div class="bc-val">10 Spins</div><button class="bc-btn" onclick="claimBonus(this,25)">Claim Free Spins</button></div></div>
-    <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#1a0a2e,#3a1a6e)"><div class="bc-tag hot">RACE</div><div class="bcard-title">Weekly Race $50K</div><div class="bcard-desc">Compete for top of leaderboard prizes</div></div><div class="bcard-body"><div class="bc-val">$50,000</div><button class="bc-btn" onclick="claimBonus(this,100)">Join Race</button></div></div>
+    <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#0a1a2e,#0f3a5e)"><div class="bc-tag vip">SILVER+</div><div class="bcard-title">Daily Free Spins</div><div class="bcard-desc">10 free spins on Slots every 24 hours. Requires Silver rank.</div></div><div class="bcard-body"><div class="bc-val">10 Spins</div><button class="bc-btn" onclick="claimFreeSpins(this)">Claim Free Spins</button></div></div>
+    <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#1a0a2e,#3a1a6e)"><div class="bc-tag vip">GOLD+</div><div class="bcard-title">Weekly Race $50K</div><div class="bcard-desc">Compete for top of leaderboard. Requires Gold rank to enter.</div></div><div class="bcard-body"><div class="bc-val">$50,000</div><button class="bc-btn" onclick="claimRace(this)">Join Race</button></div></div>
   </div>
 </div>
 <div class="page" id="pg-vip">
   <div><div class="pg-h">VIP Club</div><div class="pg-sub">Level up by wagering and unlock rewards</div></div>
   <div class="vip-banner"><div class="vb-l"><div class="vbs">Current Rank</div><div class="vbt" id="vipTierName">🥉 Bronze</div></div><div class="vb-mid"><div class="xp-row"><div class="xp-lbl" id="vipXPLbl">XP Progress</div><div class="xp-num" id="vipXPNum">0 / 1,000</div></div><div class="xp-bg"><div class="xp-fill" id="vipXPBar" style="width:0%"></div></div><div class="xp-next" id="vipNextInfo">Wager to earn XP</div></div><div class="vb-badge" id="vipBadge">BRONZE</div></div>
-  <div class="pcard"><div class="pcard-h"><span>🏆</span>VIP Tiers</div><div class="tier-grid"><div class="tc on" id="t-bronze"><div class="tc-ico">🥉</div><div class="tc-name">Bronze</div><div class="tc-req">0 XP</div><div class="tc-bonus">0.1% RB</div></div><div class="tc" id="t-silver"><div class="tc-ico">🥈</div><div class="tc-name">Silver</div><div class="tc-req">1,000 XP</div><div class="tc-bonus">0.3% RB</div></div><div class="tc" id="t-gold"><div class="tc-ico">🥇</div><div class="tc-name">Gold</div><div class="tc-req">5,000 XP</div><div class="tc-bonus">0.5% RB</div></div><div class="tc" id="t-diamond"><div class="tc-ico">💎</div><div class="tc-name">Diamond</div><div class="tc-req">20,000 XP</div><div class="tc-bonus">1% RB</div></div></div></div>
+  <div class="pcard"><div class="pcard-h"><span>🏆</span>VIP Tiers</div><div class="tier-grid"><div class="tc on" id="t-bronze"><div class="tc-ico">🥉</div><div class="tc-name">Bronze</div><div class="tc-req">0 XP</div><div class="tc-bonus">0.1% RB</div></div><div class="tc" id="t-silver"><div class="tc-ico">🥈</div><div class="tc-name">Silver</div><div class="tc-req">10,000 XP</div><div class="tc-bonus">0.3% RB</div></div><div class="tc" id="t-gold"><div class="tc-ico">🥇</div><div class="tc-name">Gold</div><div class="tc-req">50,000 XP</div><div class="tc-bonus">0.5% RB</div></div><div class="tc" id="t-diamond"><div class="tc-ico">💎</div><div class="tc-name">Diamond</div><div class="tc-req">200,000 XP</div><div class="tc-bonus">1% RB</div></div></div></div>
   <div class="pcard"><div class="pcard-h"><span>✨</span>Your Perks</div><div class="perks"><div class="perk"><div class="perk-ico">💰</div><div><div class="pi-t">Daily Rakeback</div><div class="pi-s">% back on all wagers</div></div><div class="perk-val" id="pRB">0.1%</div></div><div class="perk"><div class="perk-ico">⚡</div><div><div class="pi-t">XP Multiplier</div><div class="pi-s">Bonus XP per dollar wagered</div></div><div class="perk-val" id="pXP">1×</div></div><div class="perk"><div class="perk-ico">🎁</div><div><div class="pi-t">Weekly Bonus</div><div class="pi-s">Reload on deposits</div></div><div class="perk-val" id="pWk">None</div></div><div class="perk"><div class="perk-ico">🚀</div><div><div class="pi-t">Withdrawal Speed</div><div class="pi-s">Priority processing</div></div><div class="perk-val" id="pSpd">24h</div></div></div></div>
   <div class="pcard"><div class="pcard-h"><span>📊</span>Wager Stats</div><div class="stat-grid"><div class="sg"><div class="sg-l">Total Wagered</div><div class="sg-v go" id="stWag">$0.00</div></div><div class="sg"><div class="sg-l">Total XP</div><div class="sg-v b" id="stXP">0</div></div><div class="sg"><div class="sg-l">Rakeback Earned</div><div class="sg-v g" id="stRB">$0.00</div></div></div></div>
 </div>
@@ -924,6 +924,13 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
         </div>
         <div style="font-size:9px;color:var(--mu2);margin-top:4px" id="adminResult"></div>
       </div>
+      <div class="cs-sect"><div class="cs-sect-t">🚀 Crash Engine</div>
+        <div class="cs-row"><div><div class="cs-lbl">Run Crash Engine</div><div class="cs-sub">This browser runs the live crash for ALL players</div></div><label class="tog"><input type="checkbox" id="chCrashEngine" onchange="toggleCrashEngine(this.checked)"><div class="tog-t"></div></label></div>
+        <div style="font-size:9px;color:var(--mu2);line-height:1.5">⚠️ Only ONE browser should run this at a time. Keep this tab open while players are online.</div>
+      </div>
+      <div class="cs-sect"><div class="cs-sect-t">🤖 Fake Chat Bots</div>
+        <div class="cs-row"><div><div class="cs-lbl">Enable Bot Messages</div><div class="cs-sub">Fake users send automatic messages</div></div><label class="tog"><input type="checkbox" id="chBots" checked onchange="toggleBots(this.checked)"><div class="tog-t"></div></label></div>
+      </div>
       <div class="cs-sect"><div class="cs-sect-t">ℹ️ Status</div><div class="cs-status" id="chStatus">Loading...</div></div>
     </div>
   </div>
@@ -965,13 +972,13 @@ let bal=0,xp=0,totalWag=0,totalRB=0,gameHist=[];
 const $=id=>document.getElementById(id);
 const f2=v=>'$'+Math.abs(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
 const rnd=(v,d=2)=>Math.round(v*10**d)/10**d;
-const TIERS=[{name:'Bronze',ico:'🥉',badge:'BRONZE',minXP:0,rb:.001,xpM:1,wk:'None',spd:'24h'},{name:'Silver',ico:'🥈',badge:'SILVER',minXP:1000,rb:.003,xpM:1.5,wk:'15%',spd:'12h'},{name:'Gold',ico:'🥇',badge:'GOLD',minXP:5000,rb:.005,xpM:2,wk:'25%',spd:'4h'},{name:'Diamond',ico:'💎',badge:'DIAMOND',minXP:20000,rb:.01,xpM:3,wk:'50%',spd:'1h'}];
+const TIERS=[{name:'Bronze',ico:'🥉',badge:'BRONZE',minXP:0,rb:.001,xpM:1,wk:'None',spd:'24h'},{name:'Silver',ico:'🥈',badge:'SILVER',minXP:10000,rb:.003,xpM:1.5,wk:'15%',spd:'12h'},{name:'Gold',ico:'🥇',badge:'GOLD',minXP:50000,rb:.005,xpM:2,wk:'25%',spd:'4h'},{name:'Diamond',ico:'💎',badge:'DIAMOND',minXP:200000,rb:.01,xpM:3,wk:'50%',spd:'1h'}];
 let cheatOn=false,cheatWR=50,cheatMB=1;
 function getTier(){return TIERS.reduce((a,t)=>xp>=t.minXP?t:a,TIERS[0]);}
 function updBal(){const n=bal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});$('navBal').textContent='$'+n;['mBal','cBal','slBal','bjBal','dBal'].forEach(id=>{const e=$(id);if(e)e.textContent=f2(bal);});$('wdAvail').textContent=f2(bal);}
 function toast(msg,cls='it'){const t=$('toast');t.textContent=msg;t.className='toast show '+cls;clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2500);}
 function shake(el){el.style.borderColor='var(--red)';let i=0;const v=setInterval(()=>{el.style.transform=`translateX(${i%2===0?-4:4}px)`;if(++i>5){clearInterval(v);el.style.transform='';setTimeout(()=>el.style.borderColor='',400);}},55);}
-function addWager(a){totalWag+=a;const t=getTier();xp+=Math.round(a*.1*t.xpM);totalRB+=a*t.rb;const nt=getTier();if(nt.name!==t.name)toast('🎉 Level Up! '+nt.ico+' '+nt.name+'!','it');updVIP();updBonuses();if(chOn)updCheat();}
+function addWager(a){totalWag+=a;const t=getTier();xp+=Math.round(a*.01*t.xpM);totalRB+=a*t.rb;const nt=getTier();if(nt.name!==t.name)toast('🎉 Level Up! '+nt.ico+' '+nt.name+'!','it');updVIP();updBonuses();if(typeof updCheat==='function')updCheat();}
 function sb(id,m){const e=$(id);e.value=Math.max(0.01,rnd(parseFloat(e.value||0)*m)).toFixed(2);if(id==='db')dCalc();}
 function smax(id){$(id).value=rnd(bal).toFixed(2);if(id==='db')dCalc();}
 function gbet(id){return Math.max(0,parseFloat($(id).value)||0);}
@@ -996,7 +1003,7 @@ function goHome(el){document.querySelectorAll('.page').forEach(p=>p.classList.re
 // PROFILE
 let profTabN='main';
 function profTab(tab,el){profTabN=tab;document.querySelectorAll('.pnb').forEach(b=>b.classList.remove('on'));if(el)el.classList.add('on');renderProf(tab);}
-function renderProf(tab){const c=$('profContent');if(!c)return;const tier=getTier();if(tab==='trans'){const rows=gameHist.slice(0,20).map(h=>`<tr><td>${h.g}</td><td>${h.x}</td><td class="${h.t==='w'?'wtd':'ltd'}">${h.t==='w'?'+':'-'}${f2(h.a)}</td></tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--mu);padding:14px">No transactions yet</td></tr>';c.innerHTML=`<div class="pcard"><div class="pcard-h"><span>📊</span>Transactions</div><table class="gh-table"><thead><tr><th>Game</th><th>Details</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table></div>`;return;}const wins=gameHist.filter(h=>h.t==='w').length,losses=gameHist.filter(h=>h.t==='l').length,profit=gameHist.reduce((a,h)=>h.t==='w'?a+h.a:a-h.a,0);const uid=currentUser?currentUser.uid:'';const shortId=uid?uid.slice(0,8).toUpperCase():'—';const regDate=currentUser&&currentUser.metadata&&currentUser.metadata.creationTime?new Date(currentUser.metadata.creationTime).toLocaleDateString('en-GB',{month:'long',year:'numeric'}):'-';c.innerHTML=`<div class="pcard"><div class="pcard-h"><span>👤</span>Account</div><div class="irow"><div class="irow-l">Username</div><div class="irow-r">${currentUsername||'—'}</div></div><div class="irow"><div class="irow-l">Email</div><div class="irow-r">${(currentUser&&currentUser.email)||'—'}</div></div><div class="irow"><div class="irow-l">Player ID</div><div class="irow-r" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--blueh)">#${shortId}</div></div><div class="irow"><div class="irow-l">Member Since</div><div class="irow-r">${regDate}</div></div><div class="irow"><div class="irow-l">VIP Rank</div><div class="irow-r">${tier.ico} ${tier.name}</div></div><div class="irow"><div class="irow-l">Total XP</div><div class="irow-r" style="color:var(--blueh)">${xp.toLocaleString()}</div></div></div><div class="pcard"><div class="pcard-h"><span>💰</span>Balance</div><div class="bal-big">$${Math.floor(bal).toLocaleString()}<em>.${String(Math.round((bal%1)*100)).padStart(2,'0')}</em></div><div class="pact-row"><button class="pact" onclick="openMod('dep')">💰 Deposit</button><button class="pact" onclick="openMod('wd')">📤 Withdraw</button></div></div><div class="pcard"><div class="pcard-h"><span>📈</span>Statistics</div><div class="stat-grid"><div class="sg"><div class="sg-l">Games</div><div class="sg-v">${gameHist.length}</div></div><div class="sg"><div class="sg-l">Won</div><div class="sg-v g">${wins}</div></div><div class="sg"><div class="sg-l">Lost</div><div class="sg-v r">${losses}</div></div><div class="sg"><div class="sg-l">Win Rate</div><div class="sg-v">${gameHist.length?Math.round(wins/gameHist.length*100):0}%</div></div><div class="sg"><div class="sg-l">Wagered</div><div class="sg-v go">${f2(totalWag)}</div></div><div class="sg"><div class="sg-l">Net P&L</div><div class="sg-v ${profit>=0?'g':'r'}">${profit>=0?'+':''}${f2(profit)}</div></div></div></div><div class="pcard"><div class="pcard-h"><span>🎮</span>Recent Games</div><table class="gh-table"><thead><tr><th>Game</th><th>Details</th><th>Result</th></tr></thead><tbody>${gameHist.slice(0,8).map(h=>`<tr><td>${h.g}</td><td>${h.x}</td><td class="${h.t==='w'?'wtd':'ltd'}">${h.t==='w'?'+':'-'}${f2(h.a)}</td></tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--mu);padding:12px">Play some games first!</td></tr>'}</tbody></table></div>`;}
+function renderProf(tab){const c=$('profContent');if(!c)return;const tier=getTier();if(tab==='trans'){const rows=gameHist.slice(0,20).map(h=>`<tr><td>${h.g}</td><td>${h.x}</td><td class="${h.t==='w'?'wtd':'ltd'}">${h.t==='w'?'+':'-'}${f2(h.a)}</td></tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--mu);padding:14px">No transactions yet</td></tr>';c.innerHTML=`<div class="pcard"><div class="pcard-h"><span>📊</span>Transactions</div><table class="gh-table"><thead><tr><th>Game</th><th>Details</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table></div>`;return;}const wins=gameHist.filter(h=>h.t==='w').length,losses=gameHist.filter(h=>h.t==='l').length,profit=gameHist.reduce((a,h)=>h.t==='w'?a+h.a:a-h.a,0);const uid=currentUser?currentUser.uid:'';const shortId=uid?uid.slice(0,8).toUpperCase():'—';const regDate=currentUser&&currentUser.metadata&&currentUser.metadata.creationTime?new Date(currentUser.metadata.creationTime).toLocaleString('en-GB',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}):'-';c.innerHTML=`<div class="pcard"><div class="pcard-h"><span>👤</span>Account</div><div class="irow"><div class="irow-l">Username</div><div class="irow-r">${currentUsername||'—'}</div></div><div class="irow"><div class="irow-l">Email</div><div class="irow-r">${(currentUser&&currentUser.email)||'—'}</div></div><div class="irow"><div class="irow-l">Player ID</div><div class="irow-r" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--blueh)">#${shortId}</div></div><div class="irow"><div class="irow-l">Member Since</div><div class="irow-r">${regDate}</div></div><div class="irow"><div class="irow-l">VIP Rank</div><div class="irow-r">${tier.ico} ${tier.name}</div></div><div class="irow"><div class="irow-l">Total XP</div><div class="irow-r" style="color:var(--blueh)">${xp.toLocaleString()}</div></div></div><div class="pcard"><div class="pcard-h"><span>💰</span>Balance</div><div class="bal-big">$${Math.floor(bal).toLocaleString()}<em>.${String(Math.round((bal%1)*100)).padStart(2,'0')}</em></div><div class="pact-row"><button class="pact" onclick="openMod('dep')">💰 Deposit</button><button class="pact" onclick="openMod('wd')">📤 Withdraw</button></div></div><div class="pcard"><div class="pcard-h"><span>📈</span>Statistics</div><div class="stat-grid"><div class="sg"><div class="sg-l">Games</div><div class="sg-v">${gameHist.length}</div></div><div class="sg"><div class="sg-l">Won</div><div class="sg-v g">${wins}</div></div><div class="sg"><div class="sg-l">Lost</div><div class="sg-v r">${losses}</div></div><div class="sg"><div class="sg-l">Win Rate</div><div class="sg-v">${gameHist.length?Math.round(wins/gameHist.length*100):0}%</div></div><div class="sg"><div class="sg-l">Wagered</div><div class="sg-v go">${f2(totalWag)}</div></div><div class="sg"><div class="sg-l">Net P&L</div><div class="sg-v ${profit>=0?'g':'r'}">${profit>=0?'+':''}${f2(profit)}</div></div></div></div><div class="pcard"><div class="pcard-h"><span>🎮</span>Recent Games</div><table class="gh-table"><thead><tr><th>Game</th><th>Details</th><th>Result</th></tr></thead><tbody>${gameHist.slice(0,8).map(h=>`<tr><td>${h.g}</td><td>${h.x}</td><td class="${h.t==='w'?'wtd':'ltd'}">${h.t==='w'?'+':'-'}${f2(h.a)}</td></tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--mu);padding:12px">Play some games first!</td></tr>'}</tbody></table></div>`;}
 // HIST
 function renderH(id,game){const el=$(id);const rows=gameHist.filter(h=>h.g===game).slice(0,8);el.innerHTML=rows.map(h=>`<div class="hi"><div class="hb ${h.t}">${h.t==='w'?'W':'L'}</div><div class="hi-info">${h.x}</div><div class="hi-amt ${h.t}">${h.t==='w'?'+':'-'}${f2(h.a)}</div></div>`).join('');}
 // FAKE ACTIVITY
@@ -1047,40 +1054,209 @@ function mClick(idx){
 function mCash(){if(!mActive||mGems===0)return;let m=mCalcM(mGems);if(cheatOn)m=rnd(m*(cheatMB||1));const win=rnd(mBet_*m),pr=rnd(win-mBet_);bal+=win;updBal();mActive=false;addWager(mBet_);document.querySelectorAll('.mc').forEach(c=>c.classList.add('nc'));gameHist.unshift({g:'Mines',t:'w',a:pr,x:mGems+' gems ×'+m.toFixed(2)});renderH('mHist','Mines');$('mBtn').className='gbtn go';$('mBtnT').textContent='Bet';dw('win','Mines',mBet_,pr,mGems+' gems ×'+m.toFixed(2));setTimeout(()=>{const ov=$('mOv');ov.className='rov show wov';$('mRT').textContent='YOU WIN!';$('mRT').className='rot-w';$('mRA').textContent='+'+f2(pr);$('mRA').className='roa w';$('mRS').textContent='Cashed out with '+mGems+' gem'+(mGems!==1?'s':'');},150);toast('💎 +'+f2(pr),'wt');}
 function mNew(){$('mOv').classList.remove('show');mActive=false;mGems=0;mBuildGrid();$('mGC').textContent='0';mUpdMult(0);$('mBtn').className='gbtn go';$('mBtnT').textContent='Bet';}
 // CRASH
-let cRunning=false,cBet_=0,cMult_=1,cCrashAt=2,cInt=null,cBetOn=false,cQueued=0,cCrashH=[];
-const CP_NAMES=['Alex_K','CryptoW','Bet_Pro','DiamondH','NightB','LuckGod','RushB','TopG','FlashG','GoldR'];
-const CP_COLS=['#6366f1','#f5a623','#10b981','#ef4444','#22d3ee','#9333ea','#3ec45a','#f59e0b'];
-let cpList=[];
+// ═══════════════════════════════════════════════════════
+// CRASH - Live Firestore-backed shared round
+// ═══════════════════════════════════════════════════════
+let cBet_=0,cBetOn=false,cQueued=0,cCrashH=[];
+let cMult_=1,cRunning=false,cCrashAt=2,cInt=null;
+let cRoundId=''; // tracks current round
+const CP_NAMES=['Alex_K','CryptoW','Bet_Pro','DiamondH','NightB','LuckGod','RushB','TopG'];
+const CP_COLS=['#6366f1','#f5a623','#10b981','#ef4444','#22d3ee','#9333ea','#3ec45a'];
+
+// Listen to the shared crash round from Firestore
+let crashUnsub=null;
+function listenCrash(){
+  if(crashUnsub)crashUnsub();
+  crashUnsub=onSnapshot(doc(db,'crash','round'),function(snap){
+    if(!snap.exists())return;
+    const d=snap.data();
+    // New round started
+    if(d.id!==cRoundId){
+      cRoundId=d.id;
+      cCrashH=d.history||[];
+      updCrashBar();
+    }
+    const mult=d.mult||1;
+    const state=d.state||'waiting'; // waiting | flying | crashed
+    cMult_=mult;
+    cRunning=state==='flying';
+    // Update display
+    const multEl=document.getElementById('cMult');
+    const statusEl=document.getElementById('cStatus');
+    const rocketEl=document.getElementById('cRocket');
+    if(!multEl)return;
+    if(state==='flying'){
+      multEl.textContent=mult.toFixed(2)+'×';
+      multEl.className='crash-mult fly';
+      statusEl.textContent='FLYING';
+      statusEl.className='crash-status fly';
+      rocketEl.className='crash-rocket fly';
+      // Update player profit
+      if(cBetOn&&cBet_>0){
+        const profEl=document.getElementById('cProfit');
+        if(profEl)profEl.textContent='$'+Math.max(0,rnd(cBet_*mult-cBet_)).toFixed(2);
+      }
+      // Check auto cashout
+      const ac=parseFloat((document.getElementById('cAuto')||{}).value)||999;
+      if(cBetOn&&cBet_>0&&mult>=ac)cDoCash(mult);
+    } else if(state==='crashed'){
+      const crashMult=d.crashedAt||mult;
+      multEl.textContent=crashMult.toFixed(2)+'×';
+      multEl.className='crash-mult crash';
+      statusEl.textContent='CRASHED ×'+crashMult.toFixed(2);
+      statusEl.className='crash-status crash';
+      rocketEl.className='crash-rocket';
+      // Player lost if still in
+      if(cBetOn&&cBet_>0){
+        addWager(cBet_);
+        gameHist.unshift({g:'Crash',t:'l',a:-cBet_,x:'×'+crashMult.toFixed(2)});
+        renderH('cHist','Crash');
+        dw('lose','Crash',cBet_,-cBet_,'×'+crashMult.toFixed(2));
+        toast('💥 Crashed ×'+crashMult.toFixed(2)+' lost '+f2(cBet_),'lt');
+        cBet_=0;cBetOn=false;
+      }
+      if(cQueued>0){
+        document.getElementById('cBtn').className='gbtn cash';
+        document.getElementById('cBtnT').textContent='Cancel ('+f2(cQueued)+' queued)';
+      } else {
+        document.getElementById('cBtn').className='gbtn go';
+        document.getElementById('cBtnT').textContent='Bet';
+      }
+    } else { // waiting
+      const countdown=d.countdown||3;
+      multEl.textContent='Starting in '+countdown+'s';
+      multEl.className='crash-mult';
+      statusEl.textContent=cQueued>0?'BET QUEUED — ROUND STARTING':'NEXT ROUND IN '+countdown+'s';
+      statusEl.className='crash-status';
+      rocketEl.className='crash-rocket';
+      // Place queued bet at round start
+      if(cQueued>0&&cQueued<=bal&&d.justStarted){
+        cBet_=cQueued;bal-=cBet_;updBal();cBetOn=true;cQueued=0;
+        document.getElementById('cBtn').className='gbtn cash';
+        document.getElementById('cBtnT').textContent='Cash Out';
+        toast('✅ Bet placed: '+f2(cBet_),'it');
+      }
+    }
+    // Render live players from Firestore data
+    renderLiveCrashPlayers(d.players||[]);
+  });
+}
+
+function renderLiveCrashPlayers(players){
+  const el=document.getElementById('cPlayers');
+  if(!el)return;
+  el.innerHTML='';
+  players.slice(0,8).forEach(function(p){
+    const d=document.createElement('div');
+    d.className='cp-item';
+    d.innerHTML='<div class="cp-ava" style="background:'+(p.col||'#6366f1')+'">'+((p.name||'?').charAt(0))+'</div>'
+      +'<div class="cp-name">'+(p.name||'?')+'</div>'
+      +'<div class="cp-bet">$'+(p.bet||0).toFixed(2)+'</div>'
+      +'<div class="cp-mult '+(p.co?'w':'fly')+'">'+(p.co?'×'+p.co.toFixed(2)+'✓':'flying')+'</div>';
+    el.appendChild(d);
+  });
+}
+
 function cHandle(){
-  if(cRunning&&cBetOn&&cBet_>0){cDoCash();return;}
-  const bet=gbet('cb');if(bet<=0||bet>bal){shake($('cb'));toast('Invalid bet','lt');return;}
-  if(cQueued>0){cQueued=0;$('cBtn').className='gbtn go';$('cBtnT').textContent='Bet';toast('Bet cancelled','it');return;}
-  cQueued=bet;$('cBtn').className='gbtn cash';$('cBtnT').textContent='Cancel ('+f2(bet)+' queued)';toast('🕐 '+f2(bet)+' queued for next round','it');
+  const bet=gbet('cb');
+  if(cRunning&&cBetOn&&cBet_>0){cDoCash(cMult_);return;}
+  if(bet<=0||bet>bal){shake(document.getElementById('cb'));toast('Invalid bet','lt');return;}
+  if(cQueued>0){
+    cQueued=0;
+    document.getElementById('cBtn').className='gbtn go';
+    document.getElementById('cBtnT').textContent='Bet';
+    toast('Bet cancelled','it');return;
+  }
+  cQueued=bet;
+  document.getElementById('cBtn').className='gbtn cash';
+  document.getElementById('cBtnT').textContent='Cancel ('+f2(bet)+' queued)';
+  toast('🕐 '+f2(bet)+' queued for next round','it');
 }
-function cStartRound(){
-  cMult_=1;cBetOn=false;cpList=[];
-  if(cQueued>0&&cQueued<=bal){cBet_=cQueued;bal-=cBet_;updBal();cBetOn=true;cQueued=0;$('cBtn').className='gbtn cash';$('cBtnT').textContent='Cash Out';toast('✅ Bet placed: '+f2(cBet_),'it');}
-  else{cQueued=0;$('cBtn').className='gbtn go';$('cBtnT').textContent='Bet';}
-  $('cMult').textContent='1.00×';$('cMult').className='crash-mult fly';$('cStatus').textContent='FLYING';$('cStatus').className='crash-status fly';$('cRocket').className='crash-rocket fly';
-  const r=Math.random();cCrashAt=r<.35?rnd(1+Math.random()*.8,2):r<.6?rnd(1.8+Math.random()*3,2):r<.82?rnd(4.8+Math.random()*12,2):rnd(16+Math.random()*60,2);
-  const n=Math.floor(Math.random()*7)+3;for(let i=0;i<n;i++)cpList.push({name:CP_NAMES[Math.floor(Math.random()*CP_NAMES.length)],bet:rnd(Math.random()*200+5),col:CP_COLS[Math.floor(Math.random()*CP_COLS.length)],co:null});
-  renderCrashPlayers();let speed=.012;
-  cInt=setInterval(()=>{
-    cMult_=rnd(cMult_+speed+(cMult_*.009),2);if(cMult_>2)speed=.035;if(cMult_>5)speed=.09;if(cMult_>15)speed=.25;
-    $('cMult').textContent=cMult_.toFixed(2)+'×';
-    if(cBetOn&&cBet_>0)$('cProfit').textContent='$'+Math.max(0,rnd(cBet_*cMult_-cBet_)).toFixed(2);
-    cpList.forEach(p=>{if(!p.co&&cMult_>rnd(1.1+Math.random()*cCrashAt*.85,2)){p.co=cMult_;}});
-    renderCrashPlayers();
-    if(cBetOn&&cBet_>0){const ac=parseFloat($('cAuto').value)||999;if(cMult_>=ac){cDoCash();return;}}
-    if(cMult_>=cCrashAt)cDoCrash();
-  },80);
+
+function cDoCash(mult){
+  if(!cBetOn||cBet_<=0)return;
+  const m=cheatOn?rnd(mult*(cheatMB||1)):mult;
+  const win=rnd(cBet_*m),pr=rnd(win-cBet_);
+  bal+=win;updBal();addWager(cBet_);
+  cCrashH.unshift({m:mult,w:true});
+  gameHist.unshift({g:'Crash',t:'w',a:pr,x:'×'+mult.toFixed(2)});
+  renderH('cHist','Crash');updCrashBar();
+  dw('win','Crash',cBet_,pr,'×'+mult.toFixed(2));
+  document.getElementById('cStatus').textContent='CASHED ×'+mult.toFixed(2);
+  toast('🚀 Cashed ×'+mult.toFixed(2)+' +'+f2(pr),'wt');
+  cBet_=0;cBetOn=false;
+  document.getElementById('cBtn').className='gbtn go';
+  document.getElementById('cBtnT').textContent='Bet';
 }
-function renderCrashPlayers(){const el=$('cPlayers');el.innerHTML='';cpList.slice(0,8).forEach(p=>{const d=document.createElement('div');d.className='cp-item';d.innerHTML=`<div class="cp-ava" style="background:${p.col}">${p.name[0]}</div><div class="cp-name">${p.name}</div><div class="cp-bet">$${p.bet.toFixed(2)}</div><div class="cp-mult ${p.co?'w':'fly'}">${p.co?'×'+p.co.toFixed(2)+'✓':'flying'}</div>`;el.appendChild(d);});}
-function cDoCash(){if(!cBetOn||cBet_<=0)return;clearInterval(cInt);cRunning=false;let m=cMult_;if(cheatOn)m=rnd(m*(cheatMB||1));const win=rnd(cBet_*m),pr=rnd(win-cBet_);bal+=win;updBal();addWager(cBet_);cCrashH.unshift({m:cMult_,w:true});gameHist.unshift({g:'Crash',t:'w',a:pr,x:'×'+cMult_.toFixed(2)});renderH('cHist','Crash');updCrashBar();dw('win','Crash',cBet_,pr,'×'+cMult_.toFixed(2));$('cStatus').textContent='CASHED ×'+cMult_.toFixed(2);toast('🚀 Cashed ×'+cMult_.toFixed(2)+' +'+f2(pr),'wt');cBet_=0;cBetOn=false;$('cBtn').className='gbtn go';$('cBtnT').textContent='Bet';setTimeout(cNewRound,3500);}
-function cDoCrash(){clearInterval(cInt);cRunning=false;if(cBetOn&&cBet_>0){addWager(cBet_);gameHist.unshift({g:'Crash',t:'l',a:-cBet_,x:'×'+cMult_.toFixed(2)});renderH('cHist','Crash');dw('lose','Crash',cBet_,-cBet_,'×'+cMult_.toFixed(2));toast('💥 Crashed ×'+cMult_.toFixed(2)+' lost '+f2(cBet_),'lt');}cCrashH.unshift({m:cMult_,w:false});updCrashBar();$('cMult').className='crash-mult crash';$('cStatus').textContent='CRASHED ×'+cMult_.toFixed(2);$('cStatus').className='crash-status crash';$('cRocket').className='crash-rocket';cBet_=0;cBetOn=false;if(cQueued>0){$('cBtn').className='gbtn cash';$('cBtnT').textContent='Cancel ('+f2(cQueued)+' queued)';}else{$('cBtn').className='gbtn go';$('cBtnT').textContent='Bet';}setTimeout(cNewRound,3500);}
-function cNewRound(){cRunning=true;$('cMult').textContent='Starting...';$('cMult').className='crash-mult';$('cStatus').textContent=cQueued>0?'BET QUEUED — STARTING SOON':'NEXT ROUND IN 3s';$('cStatus').className='crash-status';setTimeout(()=>{if(!cRunning)return;cStartRound();},3000);}
-function updCrashBar(){const el=$('cBar');el.innerHTML='';cCrashH.slice(0,15).forEach(h=>{const p=document.createElement('div');p.className='cpill';p.classList.add(h.m<2?'lo':h.m<10?'mid':'hi');p.textContent='×'+h.m.toFixed(2);el.appendChild(p);});}
-setTimeout(()=>{cRunning=true;cStartRound();},1200);
+
+function updCrashBar(){
+  const el=document.getElementById('cBar');if(!el)return;
+  el.innerHTML='';
+  cCrashH.slice(0,15).forEach(function(h){
+    const p=document.createElement('div');
+    p.className='cpill';
+    p.classList.add(h.m<2?'lo':h.m<10?'mid':'hi');
+    p.textContent='×'+h.m.toFixed(2);
+    el.appendChild(p);
+  });
+}
+
+// ── Admin crash engine (only one browser runs this, others just listen) ──
+// Stored in Firestore: crash/round doc
+// Admin can enable/disable this from cheat panel
+let crashEngineRunning=false;
+async function startCrashEngine(){
+  if(crashEngineRunning)return;
+  crashEngineRunning=true;
+  console.log('🚀 Crash engine started');
+  await runCrashRound();
+}
+
+async function runCrashRound(){
+  if(!crashEngineRunning)return;
+  const roundId='round_'+Date.now();
+  const r=Math.random();
+  const crashAt=r<.35?rnd(1+Math.random()*.8,2):r<.6?rnd(1.8+Math.random()*3,2):r<.82?rnd(4.8+Math.random()*12,2):rnd(16+Math.random()*60,2);
+  // Generate fake players
+  const fakePlayers=[];
+  const n=Math.floor(Math.random()*6)+3;
+  for(let i=0;i<n;i++){
+    fakePlayers.push({
+      name:CP_NAMES[Math.floor(Math.random()*CP_NAMES.length)],
+      bet:rnd(Math.random()*200+5),
+      col:CP_COLS[Math.floor(Math.random()*CP_COLS.length)],
+      co:null
+    });
+  }
+  // Waiting phase
+  for(let cd=3;cd>=1;cd--){
+    await setDoc(doc(db,'crash','round'),{id:roundId,state:'waiting',mult:1,countdown:cd,justStarted:cd===3,players:fakePlayers,history:cCrashH.slice(0,15)},{merge:false});
+    await sleep(1000);
+    if(!crashEngineRunning)return;
+  }
+  // Flying phase
+  let mult=1;let speed=0.012;
+  while(mult<crashAt){
+    if(!crashEngineRunning)return;
+    mult=rnd(mult+speed+(mult*.009),2);
+    if(mult>2)speed=.035;if(mult>5)speed=.09;if(mult>15)speed=.25;
+    if(mult>crashAt)mult=crashAt;
+    // Fake cashouts
+    fakePlayers.forEach(function(p){
+      if(!p.co&&mult>rnd(1.1+Math.random()*crashAt*.85,2))p.co=mult;
+    });
+    await setDoc(doc(db,'crash','round'),{id:roundId,state:'flying',mult:mult,crashedAt:null,players:fakePlayers,history:cCrashH.slice(0,15)},{merge:false});
+    await sleep(80);
+  }
+  // Crashed
+  cCrashH.unshift({m:mult,w:false});
+  await setDoc(doc(db,'crash','round'),{id:roundId,state:'crashed',mult:mult,crashedAt:mult,players:fakePlayers,history:cCrashH.slice(0,15)},{merge:false});
+  await sleep(3500);
+  if(crashEngineRunning)runCrashRound();
+}
+
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
+
 // SLOTS
 const SYMS=['🍒','🍋','🍊','🍇','⭐','💎','7️⃣','🔔'];
 const PAYS={'💎💎💎':50,'7️⃣7️⃣7️⃣':25,'⭐⭐⭐':10,'🔔🔔🔔':8,'🍇🍇🍇':5,'🍊🍊🍊':4,'🍋🍋🍋':3,'🍒🍒🍒':2};
@@ -1147,8 +1323,8 @@ const CU=[{n:'Alex_K',v:'bronze',c:'#4f46e5'},{n:'CryptoW',v:'gold',c:'#f59e0b'}
 const CM=['big win on mines!! 🔥','crash ×23.4 lets go','hit 💎💎💎 on slots omg','crash going crazy rn','mines is my fav game 🎯','vaultbet GOATED 🏆','cashed ×15 on crash 😭','blackjack busted again 💀','who else grinding rn?','this site is actually legit','crash ×47 NO WAY 🚀','mines 5 gems 3 bombs','been here 3 hours lol','dice just hit 98.47 🎲','hit blackjack 1.5x','rakeback dropped 💰','just lost everything rip','DIAMOND VIP lets go!!!','grinding for gold rank','crash ×2.1 caught it','slots 7️⃣7️⃣7️⃣ 25x LETS GO','anyone hitting big tonight?'];
 function addChatMsg(name,vip,col,text,isMe=false){const el=$('chatMsgs');const div=document.createElement('div');div.className='cm';div.innerHTML=`<div class="cm-top"><div class="cm-ava" style="background:${isMe?'linear-gradient(135deg,#6366f1,#9333ea)':col}">${name[0]}</div><div class="cm-name" style="color:${isMe?'#818cf8':'inherit'}">${name}</div>${vip?`<div class="cm-vip ${vip}">${vip.toUpperCase()}</div>`:''}</div><div class="cm-txt">${text}</div>`;el.appendChild(div);el.scrollTop=el.scrollHeight;}
 function sendChat(){const inp=$('chatInp');const msg=inp.value.trim();if(!msg)return;addChatMsg('You','bronze','',msg,true);inp.value='';}
-(function chatBot(){setTimeout(()=>{const u=CU[Math.floor(Math.random()*CU.length)];addChatMsg(u.n,u.v,u.c,CM[Math.floor(Math.random()*CM.length)]);chatBot();},Math.random()*5000+2000);})();
-for(let i=0;i<5;i++)setTimeout(()=>{const u=CU[Math.floor(Math.random()*CU.length)];addChatMsg(u.n,u.v,u.c,CM[Math.floor(Math.random()*CM.length)]);},i*300+200);
+(function chatBot(){setTimeout(()=>{if(typeof botsEnabled==='undefined'||botsEnabled){const u=CU[Math.floor(Math.random()*CU.length)];addChatMsg(u.n,u.v,u.c,CM[Math.floor(Math.random()*CM.length)]);}chatBot();},Math.random()*5000+2000);})();
+for(let i=0;i<5;i++)setTimeout(()=>{if(typeof botsEnabled==='undefined'||botsEnabled){const u=CU[Math.floor(Math.random()*CU.length)];addChatMsg(u.n,u.v,u.c,CM[Math.floor(Math.random()*CM.length)]);}},i*300+200);
 setInterval(()=>{const o=Math.floor(Math.random()*80)+215;$('chatOnline').textContent=o+' online';},7000);
 // TICKER
 const TN=['Alex','CryptoW','Bet_Pro','xx_dark','LuckGod','NightB','RushB','DiamondH','TopG','SlimS','BabyC','BetKing','GoldR','SpeedR','LuckyJ','VipPro','HighR','NovaBet','StarK'];
@@ -1576,6 +1752,38 @@ window.openMod=openMod;
 // ═══════════════════════════════════════════════════════
 // ADMIN CHEAT PANEL: Global rig controls
 // ═══════════════════════════════════════════════════════
+window.toggleCrashEngine=function(on){
+  if(on){
+    crashEngineRunning=false; // reset first
+    startCrashEngine();
+    toast('🚀 Crash engine started','it');
+  } else {
+    crashEngineRunning=false;
+    toast('Crash engine stopped','lt');
+  }
+};
+
+let botsEnabled=true;
+window.toggleBots=function(on){
+  botsEnabled=on;
+  toast(on?'🤖 Bots enabled':'🤖 Bots disabled','it');
+};
+
+window.claimFreeSpins=function(btn){
+  const tier=getTier();
+  if(tier.name==='Bronze'){toast('Requires Silver VIP rank','lt');return;}
+  claimBonus(btn,0); // no free money, just spins
+  // Give 10 free spins by spinning slots 10 times at $0
+  toast('🎰 10 free spins granted!','it');
+};
+
+window.claimRace=function(btn){
+  const tier=getTier();
+  if(tier.name==='Bronze'||tier.name==='Silver'){toast('Requires Gold VIP rank','lt');return;}
+  btn.textContent='✓ Joined!';btn.className='bc-btn claimed';
+  toast('🏆 Entered Weekly Race!','it');
+};
+
 window.saveGlobalRig=async function(){
   const on=document.getElementById('gRigOn')&&document.getElementById('gRigOn').checked||false;
   const wr=parseInt(document.getElementById('gWinRate')&&document.getElementById('gWinRate').value)||50;
@@ -1598,6 +1806,7 @@ _loadUser=async function(uid){
   await __origLoadUser(uid);
   startLiveChat();
   listenGlobalRig();
+  listenCrash();
 };
 
 // ─── ADMIN: Add balance to any user by UID or email ───
