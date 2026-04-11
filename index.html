@@ -916,10 +916,18 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
           </div>
           <div class="cust-wrap"><input type="number" id="wdCust" placeholder="Custom amount..." oninput="custWdAmt(this)"></div>
           <div class="meths">
+            <div class="meth" onclick="selWdM(this,'vaultbank')" id="wVB" style="border:1px solid rgba(196,154,60,.3);background:linear-gradient(135deg,rgba(196,154,60,.06),rgba(196,154,60,.02))"><div class="meth-ico" style="background:linear-gradient(135deg,#1a1200,#3d2e00)">🏦</div><div><div class="meth-mn" style="color:var(--gold)">VaultBank</div><div class="meth-ms">Instant · Same account</div></div><div class="meth-chk"></div></div>
             <div class="meth sel" onclick="selWdM(this,'bank')" id="wB"><div class="meth-ico" style="background:linear-gradient(135deg,#1a3a6e,#2563eb)">🏦</div><div><div class="meth-mn">Bank Transfer</div><div class="meth-ms">IBAN · 1–3 business days</div></div><div class="meth-chk">✓</div></div>
             <div class="meth" onclick="selWdM(this,'btc')" id="wBTC"><div class="meth-ico" style="background:linear-gradient(135deg,#2a1a00,#6a4000)">₿</div><div><div class="meth-mn">Bitcoin (BTC)</div><div class="meth-ms">Network fee applies · ~1h</div></div><div class="meth-chk"></div></div>
             <div class="meth" onclick="selWdM(this,'eth')" id="wETH"><div class="meth-ico" style="background:linear-gradient(135deg,#0a0a3e,#1a1a8e)">Ξ</div><div><div class="meth-mn">Ethereum (ETH)</div><div class="meth-ms">Network fee applies · ~30min</div></div><div class="meth-chk"></div></div>
             <div class="meth" onclick="selWdM(this,'usdt')" id="wUSDT"><div class="meth-ico" style="background:linear-gradient(135deg,#003a1a,#008a40)">₮</div><div><div class="meth-mn">Tether (USDT)</div><div class="meth-ms">TRC20 · Instant · Low fees</div></div><div class="meth-chk"></div></div>
+          </div>
+          <div class="card-form" id="wdVaultBankF" style="display:none">
+            <div style="background:rgba(196,154,60,.08);border:1px solid rgba(196,154,60,.2);border-radius:8px;padding:10px 12px;font-size:10px;color:var(--gold);line-height:1.6;margin-bottom:4px">
+              🏦 <strong>Instant transfer</strong> — funds appear in the VaultBank account immediately after admin approval.
+            </div>
+            <input class="cf-i" type="email" id="wdVaultEmail" placeholder="VaultBank account email address...">
+            <div style="font-size:9px;color:var(--mu2);padding:2px 4px">Enter the email linked to the recipient's VaultBank account</div>
           </div>
           <div class="card-form" id="wdBankF">
             <input class="cf-i" type="text" id="wdIBAN" placeholder="IBAN (e.g. CZ65 0800 0000 1920 0014 5399)">
@@ -1966,11 +1974,19 @@ function switchWdTab(tab){
 function selWdAmt(el,v){document.querySelectorAll('#wS0 .ag').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');wdAmtSel=v;const wc=$('wdCust');if(wc)wc.value='';}
 function selWdAll(){document.querySelectorAll('#wS0 .ag').forEach(b=>b.classList.remove('sel'));wdAmtSel=bal;const wc=$('wdCust');if(wc)wc.value=bal.toFixed(2);}
 function custWdAmt(el){const v=parseFloat(el.value)||0;if(v>0){wdAmtSel=v;document.querySelectorAll('#wS0 .ag').forEach(b=>b.classList.remove('sel'));}}
-function selWdM(el,name){document.querySelectorAll('#wS0 .meth').forEach(m=>{m.classList.remove('sel');const k=m.querySelector('.meth-chk');if(k)k.textContent='';});el.classList.add('sel');const k=el.querySelector('.meth-chk');if(k)k.textContent='✓';wdMeth=name;const wbf=$('wdBankF');if(wbf)wbf.style.display=name==='bank'?'flex':'none';const wcf=$('wdCryptoF');if(wcf)wcf.style.display=name!=='bank'?'flex':'none';}
+function selWdM(el,name){
+  document.querySelectorAll('#wS0 .meth').forEach(m=>{m.classList.remove('sel');const k=m.querySelector('.meth-chk');if(k)k.textContent='';});
+  el.classList.add('sel');const k=el.querySelector('.meth-chk');if(k)k.textContent='✓';
+  wdMeth=name;
+  const wbf=$('wdBankF');if(wbf)wbf.style.display=name==='bank'?'flex':'none';
+  const wcf=$('wdCryptoF');if(wcf)wcf.style.display=(name==='btc'||name==='eth'||name==='usdt')?'flex':'none';
+  const vbf=$('wdVaultBankF');if(vbf)vbf.style.display=name==='vaultbank'?'flex':'none';
+}
 async function startWd(){
   const amt=wdAmtSel||parseFloat(($('wdCust')||{}).value)||0;
   if(amt<=0||amt>bal){toast('Invalid amount','lt');return;}
-  if(wdMeth!=='bank'&&!(($('wdAddr')||{}).value||'').trim()){toast('Enter wallet address','lt');return;}
+  if(wdMeth==='vaultbank'&&!(($('wdVaultEmail')||{}).value||'').trim()){toast('Enter VaultBank email address','lt');return;}
+  if((wdMeth==='btc'||wdMeth==='eth'||wdMeth==='usdt')&&!(($('wdAddr')||{}).value||'').trim()){toast('Enter wallet address','lt');return;}
   const s0=$('wS0'),s1=$('wS1');
   if(s0){s0.classList.remove('on');s0.style.display='none';}
   if(s1){s1.classList.add('on');s1.style.display='flex';}
@@ -1980,12 +1996,36 @@ async function startWd(){
   const holder=($('wdHolder')||{}).value||'';
   const bank=($('wdBank')||{}).value||'';
   const addr=($('wdAddr')||{}).value||'';
-  const detail=wdMeth==='bank'?'IBAN: '+iban+' | '+holder+' | '+bank:'Wallet: '+addr;
+  const vbEmail=($('wdVaultEmail')||{}).value?.trim()||'';
+  const detail=wdMeth==='vaultbank'
+    ?'VaultBank: '+vbEmail
+    :wdMeth==='bank'
+    ?'IBAN: '+iban+' | '+holder+' | '+bank
+    :'Wallet: '+addr;
   const ref='WD-'+Math.floor(Math.random()*900000+100000);
   try{
     bal-=amt;updBal();
     if(currentUser){
-      await addDoc(collection(db,'withdrawals'),{userId:currentUser.uid,username:currentUsername,email:currentUser.email||'',amount:amt,method:wdMeth,detail,ref,status:'pending',createdAt:serverTimestamp()});
+      // Save withdrawal to Firestore
+      const wdRef=await addDoc(collection(db,'withdrawals'),{
+        userId:currentUser.uid,username:currentUsername,email:currentUser.email||'',
+        amount:amt,method:wdMeth,detail,ref,
+        status:'pending',
+        vaultBankEmail:wdMeth==='vaultbank'?vbEmail:'',
+        createdAt:serverTimestamp()
+      });
+      // If VaultBank - look up recipient and store their ID for instant credit on approval
+      if(wdMeth==='vaultbank'&&vbEmail){
+        try{
+          const uq=await getDocs(query(collection(db,'users'),where('email','==',vbEmail),limit(1)));
+          if(!uq.empty){
+            const recipientId=uq.docs[0].id;
+            await setDoc(doc(db,'withdrawals',wdRef.id),{recipientBankId:recipientId},{merge:true});
+          }else{
+            toast('⚠️ VaultBank email not registered — withdrawal still submitted','lt');
+          }
+        }catch(e2){console.warn('VaultBank lookup:',e2);}
+      }
       await _saveNow();
     }
     clearInterval(iv);
@@ -2049,11 +2089,38 @@ async function openWdAdmin(){
 async function adminApproveWd(docId,btn){
   btn.disabled=true;btn.textContent='Processing...';
   try{
+    // Get withdrawal data first
+    const wdSnap=await getDoc(doc(db,'withdrawals',docId));
+    const wd=wdSnap.data();
+    // Mark as approved
     await setDoc(doc(db,'withdrawals',docId),{status:'approved',processedAt:serverTimestamp()},{merge:true});
+    // If VaultBank method — instantly credit recipient bank account
+    if(wd.method==='vaultbank'&&wd.recipientBankId){
+      const bankRef=doc(db,'bank_accounts',wd.recipientBankId);
+      const bankSnap=await getDoc(bankRef);
+      const curBal=bankSnap.exists()?Number(bankSnap.data().balance)||0:0;
+      const curTx=bankSnap.exists()&&Array.isArray(bankSnap.data().transactions)?bankSnap.data().transactions:[];
+      const newTx={
+        id:docId,ref:wd.ref||docId,
+        type:'casino_withdrawal',
+        name:'VaultBet Casino',
+        detail:'Casino withdrawal from '+( wd.username||'player')+' — '+(wd.ref||docId),
+        amount:Number(wd.amount)||0,
+        date:new Date().toISOString(),
+        status:'completed'
+      };
+      await setDoc(bankRef,{
+        balance:Math.round((curBal+Number(wd.amount))*100)/100,
+        transactions:[newTx,...curTx].slice(0,100),
+        lastUpdated:serverTimestamp()
+      },{merge:true});
+      toast('✅ Approved + €'+wd.amount+' credited to VaultBank','it');
+    }else{
+      toast('✅ Approved','it');
+    }
     const row=btn.closest('.wd-item');
     const st=row.querySelector('.wd-item-status');if(st){st.textContent='✅ Approved';st.className='wd-item-status wd-status-approved';}
     btn.closest('.wd-admin-btns').remove();
-    toast('✅ Approved','it');
   }catch(e){btn.disabled=false;btn.textContent='✅ Approve';toast('Error: '+e.message,'lt');}
 }
 async function adminRejectWd(docId,userId,amount,btn){
