@@ -1499,23 +1499,25 @@ async function _loadUser(uid){
     const snap=await getDoc(doc(db,'users',uid));
     if(snap.exists()){
       const d=snap.data();
-      console.log('✅ Loaded data:',JSON.stringify(d));
+      console.log('✅ Loaded:',d.username,'bal=',d.balance,'xp=',d.xp);
       currentUsername=d.username||'Player';
       bal=Number(d.balance)||0;
       xp=Number(d.xp)||0;
       totalWag=Number(d.totalWagered)||0;
       totalRB=Number(d.totalRakeback)||0;
-      // load history (requires Firestore index - see console if it fails)
-      try{
-        const hs=await getDocs(query(collection(db,'game_history'),where('userId','==',uid),orderBy('createdAt','desc'),limit(50)));
-        gameHist=hs.docs.map(d2=>({g:d2.data().g||'',t:d2.data().t||'l',a:Number(d2.data().a)||0,x:d2.data().x||''}));
-        console.log('📜 History:',gameHist.length,'entries');
-      }catch(he){console.warn('History query failed:',he.message);gameHist=[];}
+      // Load game history stored directly on the user doc (no index needed)
+      if(d.recentGames&&Array.isArray(d.recentGames)){
+        gameHist=d.recentGames;
+        console.log('📜 History loaded:',gameHist.length,'games');
+      } else {
+        gameHist=[];
+      }
     }else{
-      console.warn('⚠️ No user doc - new account');
+      console.warn('⚠️ No user doc yet');
       bal=0;xp=0;totalWag=0;totalRB=0;gameHist=[];
     }
-    updBal();updVIP();updBonuses();updCheat();
+    updBal();updVIP();updBonuses();
+    if(typeof updCheat==='function')updCheat();
   }catch(e){
     console.error('❌ LOAD ERROR:',e.code,e.message);
     bal=0;xp=0;updBal();updVIP();
@@ -1533,29 +1535,39 @@ function _scheduleSave(){
 async function _saveNow(){
   if(!currentUser)return;
   try{
-    // Use setDoc with merge:true so it works even if doc missing
+    const wins=gameHist.filter(h=>h.t==='w').length;
+    const losses=gameHist.filter(h=>h.t==='l').length;
+    // Save everything including recentGames array directly on user doc
+    // This way no composite index needed - loads instantly on login
     await setDoc(doc(db,'users',currentUser.uid),{
       balance:Math.round(bal*100)/100,
       xp:Math.round(xp),
       totalWagered:Math.round(totalWag*100)/100,
       totalRakeback:Math.round(totalRB*100)/100,
       gamesPlayed:gameHist.length,
-      gamesWon:gameHist.filter(h=>h.t==='w').length,
-      gamesLost:gameHist.filter(h=>h.t==='l').length,
+      gamesWon:wins,
+      gamesLost:losses,
+      recentGames:gameHist.slice(0,50), // store last 50 games on user doc
       lastSeen:serverTimestamp()
     },{merge:true});
-    console.log('✅ Saved: bal='+bal+' xp='+xp);
+    console.log('✅ Saved: bal='+Math.round(bal*100)/100+' xp='+xp+' games='+gameHist.length);
   }catch(e){console.error('❌ SAVE FAILED:',e.code,e.message);}
 }
 
 // ── Save a game result to Firestore ──
 function _saveGame(game,result,bet,profit,detail){
   if(!currentUser)return;
+  // Immediately save to Firestore - no debounce for game results
+  _saveNow();
+  // Also write to game_history collection for admin stats (best effort)
   addDoc(collection(db,'game_history'),{
-    userId:currentUser.uid,username:currentUsername,
-    g:game,t:result,a:profit,x:detail,bet,profit,
+    userId:currentUser.uid,
+    username:currentUsername,
+    g:game,t:result,a:profit,x:detail,
+    bet:Math.round(bet*100)/100,
+    profit:Math.round(profit*100)/100,
     createdAt:serverTimestamp()
-  }).catch(()=>{});
+  }).catch(function(e){console.warn('game_history write failed:',e.message);});
 }
 
 // ── Logout ──
@@ -1607,37 +1619,75 @@ document.addEventListener('click',()=>closeUserMenu());
 
 // ── Hook addWager to trigger save after every bet ──
 const __aw=addWager;
-addWager=function(a){__aw(a);_scheduleSave();};
+addWager=function(a){
+  __aw(a);
+  _scheduleSave(); // debounced balance/xp save
+};
 
-// ── Hook mCash to save game result ──
+// ── Universal game result saver - called after every game outcome ──
+function _onGameResult(){
+  if(!currentUser)return;
+  // Save immediately so reload always shows latest data
+  clearTimeout(_saveTimer);
+  _saveNow();
+}
+
+// ── Hook mCash (mines win) ──
 const __mc=mCash;
 mCash=function(){
   const prevLen=gameHist.length;
   __mc();
-  if(gameHist.length>prevLen&&gameHist[0])_saveGame(gameHist[0].g,gameHist[0].t,Math.abs(gameHist[0].a)||mBet_,gameHist[0].a,gameHist[0].x);
+  if(gameHist.length>prevLen&&gameHist[0]){
+    _saveGame(gameHist[0].g,gameHist[0].t,mBet_,gameHist[0].a,gameHist[0].x);
+  }
 };
+
+// ── Hook mClick mine hit (mines loss) - patch via addWager which is called on loss ──
+// mClick already calls addWager which triggers _scheduleSave
+// But we also patch the loss path directly:
+const __mOrigClick=mClick;
+// Instead intercept via gameHist monitor
+let _lastHistLen=0;
+setInterval(function(){
+  if(gameHist.length!==_lastHistLen){
+    _lastHistLen=gameHist.length;
+    if(currentUser&&gameHist[0])_saveNow();
+  }
+},3000); // Check every 3s if new games were added
 
 // ── Hook spinSlots to save ──
 const __ss=spinSlots;
 spinSlots=async function(){
-  const prevLen=gameHist.length;
   await __ss();
-  if(gameHist.length>prevLen&&gameHist[0])_saveGame(gameHist[0].g,gameHist[0].t,gbet('slb'),gameHist[0].a,gameHist[0].x);
+  if(gameHist[0]&&gameHist[0].g==='Slots'){
+    _saveGame(gameHist[0].g,gameHist[0].t,gbet('slb'),gameHist[0].a,gameHist[0].x);
+  }
 };
 
 // ── Hook rollDice to save ──
 const __rd=rollDice;
 rollDice=async function(){
-  const prevLen=gameHist.length;
   await __rd();
-  if(gameHist.length>prevLen&&gameHist[0])_saveGame(gameHist[0].g,gameHist[0].t,gbet('db'),gameHist[0].a,gameHist[0].x);
+  if(gameHist[0]&&gameHist[0].g==='Dice'){
+    _saveGame(gameHist[0].g,gameHist[0].t,gbet('db'),gameHist[0].a,gameHist[0].x);
+  }
 };
 
-// ── Hook deposit/withdraw to save ──
+// ── Hook bjEnd via bjReset - BJ saves when hand ends ──
+const __bjR=bjReset;
+bjReset=function(){
+  __bjR();
+  if(gameHist[0]&&gameHist[0].g==='Blackjack'){
+    _saveGame(gameHist[0].g,gameHist[0].t,gbet('bjb'),gameHist[0].a,gameHist[0].x);
+  }
+};
+window.bjReset=bjReset;
+
+// ── Hook deposit/withdraw to save balance ──
 const __sd=startDep;
-startDep=function(){__sd();setTimeout(_scheduleSave,3200);};
+startDep=function(){__sd();setTimeout(_saveNow,3200);};
 const __sw=startWd;
-startWd=function(){__sw();setTimeout(_scheduleSave,3500);};
+startWd=function(){__sw();setTimeout(_saveNow,3500);};
 
 // ════════════ INIT ════════════
 $('authOv').style.display='flex';
