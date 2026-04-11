@@ -587,6 +587,48 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
 </div>
 </div>
 <div class="save-ind" id="saveInd"><div class="save-dot"></div>Saving...</div>
+
+<!-- SUPPORT MODAL -->
+<div class="mod-ov" id="supportOv" onclick="if(event.target===this)closeSupport()">
+  <div class="mod-sheet" style="max-width:420px">
+    <div class="mod-handle"></div>
+    <div class="mod-head">
+      <div><div class="mod-title">💬 Support</div><div class="mod-sub">We typically reply within a few hours</div></div>
+      <div class="mod-x" onclick="closeSupport()">×</div>
+    </div>
+    <div class="mod-body">
+      <div style="display:flex;flex-direction:column;gap:10px;width:100%" id="supportForm">
+        <div style="font-size:11px;color:var(--mu2);line-height:1.6;background:var(--card2);border-radius:8px;padding:10px 12px">
+          📧 Your message will be sent to our support team. Please include as much detail as possible.
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <label style="font-size:10px;color:var(--mu2);font-weight:600">Subject</label>
+          <select id="supportSubject" style="width:100%;background:var(--inp);border:1.5px solid var(--b2);border-radius:8px;padding:9px 11px;font-size:12px;color:var(--tx);outline:none;font-family:Inter,sans-serif">
+            <option value="payment">Payment / Deposit Issue</option>
+            <option value="withdrawal">Withdrawal Problem</option>
+            <option value="account">Account Question</option>
+            <option value="game">Game Issue</option>
+            <option value="bonus">Bonus / Promotion</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <label style="font-size:10px;color:var(--mu2);font-weight:600">Message</label>
+          <textarea id="supportMsg" placeholder="Describe your issue in detail..." style="width:100%;background:var(--inp);border:1.5px solid var(--b2);border-radius:8px;padding:9px 11px;font-size:12px;color:var(--tx);outline:none;font-family:Inter,sans-serif;resize:vertical;min-height:100px;max-height:200px" oninput="this.style.borderColor='var(--blue)'"></textarea>
+        </div>
+        <div class="auth-err" id="supportErr">Please write a message first</div>
+        <button class="mnext" onclick="submitSupport()" style="width:100%;padding:11px">Send Message →</button>
+        <div style="font-size:9px;color:var(--mu);text-align:center">Your account email will be included automatically</div>
+      </div>
+      <div id="supportSuccess" style="display:none;flex-direction:column;align-items:center;gap:12px;padding:20px 0">
+        <div style="width:56px;height:56px;border-radius:50%;background:rgba(62,196,90,.15);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:24px">✓</div>
+        <div style="font-size:15px;font-weight:700;color:#fff">Message Sent!</div>
+        <div style="font-size:12px;color:var(--mu2);text-align:center;line-height:1.6">We received your message and will reply to your email within 24 hours.</div>
+        <button class="mnext" onclick="closeSupport()" style="width:100%;padding:10px">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- NAV -->
 <nav class="nav">
   <div class="logo"><div class="logo-ico">🎰</div>VaultBet</div>
@@ -621,7 +663,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
   <div class="sbi" title="Bonuses" onclick="openPage('bonuses',this)">🎁</div>
   <div class="sbi" title="VIP" onclick="openPage('vip',this)">⭐</div>
   <div class="sb-sep sb-bot"></div>
-  <div class="sbi" title="Admin (PIN: 6767)" onclick="openPin()">⚙️</div>
+  <div class="sbi" title="Settings" onclick="openPin()">⚙️</div>
 </aside>
 <div class="main">
 <div class="game-area" id="gameArea">
@@ -779,7 +821,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
       <button class="pnb" onclick="profTab('trans',this)">📊 Transactions</button>
       <button class="pnb" onclick="openPage('vip',null)">⭐ VIP Status</button>
       <div style="margin-top:auto;padding-top:8px;border-top:1px solid var(--b1);display:flex;flex-direction:column;gap:4px">
-        <button class="pnb" style="background:var(--card2);border:1px solid var(--b2);border-radius:7px">💬 Support</button>
+        <button class="pnb" onclick="openSupport()" style="background:var(--card2);border:1px solid var(--b2);border-radius:7px">💬 Support</button>
         <button class="pnb" onclick="doLogout()" style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:7px;color:var(--redh);font-weight:600">🚪 Sign Out</button>
       </div>
     </div>
@@ -788,14 +830,15 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
 </div>
 <div class="page" id="pg-bonuses">
   <div><div class="pg-h">Bonuses & Promotions</div><div class="pg-sub">Claim exclusive offers and rewards</div></div>
-  <div class="bonus-grid">
-    <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#0a2e1a,#0f4a28)"><div class="bc-tag new">NEW</div><div class="bcard-title">Welcome Bonus</div><div class="bcard-desc">100% match on first deposit up to $500</div></div><div class="bcard-body"><div class="bc-val">+100%</div><button class="bc-btn" onclick="claimBonus(this,50)">Claim $50 Bonus</button></div></div>
-    <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#1a0a0a,#4a1010)"><div class="bc-tag hot">🔥 HOT</div><div class="bcard-title">Daily Rakeback</div><div class="bcard-desc">Earn back a % of every bet daily</div></div><div class="bcard-body"><div class="bc-val" id="rbAmt">$0.00</div><button class="bc-btn" id="rbBtn" onclick="claimRakeback()">Claim Rakeback</button></div></div>
-    <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#1a1200,#4a3500)"><div class="bc-tag ex">EXCLUSIVE</div><div class="bcard-title">Promo Code</div><div class="bcard-desc">Enter your exclusive code for a balance boost</div></div><div class="bcard-body"><div class="bc-val">???</div><div class="promo-row"><input class="promo-inp" id="promoInp" placeholder="Enter code..."><button class="promo-apply" onclick="claimPromo()">Apply</button></div></div></div>
-    <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#0a0a2e,#1a1a6e)"><div class="bc-tag vip">VIP</div><div class="bcard-title">Weekly Reload</div><div class="bcard-desc">Silver+ get 15% weekly reload bonus</div></div><div class="bcard-body"><div class="bc-val">+15%</div><button class="bc-btn claimed">Requires Silver VIP</button></div></div>
-    <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#0a1a2e,#0f3a5e)"><div class="bc-tag vip">SILVER+</div><div class="bcard-title">Daily Free Spins</div><div class="bcard-desc">10 free spins on Slots every 24 hours. Requires Silver rank.</div></div><div class="bcard-body"><div class="bc-val">10 Spins</div><button class="bc-btn" onclick="claimFreeSpins(this)">Claim Free Spins</button></div></div>
-    <div class="bcard"><div class="bcard-hd" style="background:linear-gradient(135deg,#1a0a2e,#3a1a6e)"><div class="bc-tag vip">GOLD+</div><div class="bcard-title">Weekly Race $50K</div><div class="bcard-desc">Compete for top of leaderboard. Requires Gold rank to enter.</div></div><div class="bcard-body"><div class="bc-val">$50,000</div><button class="bc-btn" onclick="claimRace(this)">Join Race</button></div></div>
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;gap:16px;text-align:center">
+    <div style="font-size:48px">🎁</div>
+    <div style="font-size:18px;font-weight:800;color:#fff">No Active Promotions</div>
+    <div style="font-size:13px;color:var(--mu2);max-width:320px;line-height:1.6">Bonuses and promotions are currently disabled. Check back later for exclusive offers.</div>
+    <div style="font-size:11px;color:var(--mu);margin-top:8px">Follow our community for upcoming bonus announcements.</div>
   </div>
+  <!-- Hidden elements needed by JS -->
+  <span id="rbAmt" style="display:none">$0.00</span>
+  <button id="rbBtn" style="display:none"></button>
 </div>
 <div class="page" id="pg-vip">
   <div><div class="pg-h">VIP Club</div><div class="pg-sub">Level up by wagering and unlock rewards</div></div>
@@ -929,7 +972,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
 <!-- PIN -->
 <div class="pin-ov" id="pinOv">
   <div class="pin-box">
-    <div class="pin-ico">⚙️</div><div class="pin-title">Admin Access</div><div class="pin-sub">6767 = Admin Panel &nbsp;|&nbsp; 6868 = Withdrawals</div>
+    <div class="pin-ico">⚙️</div><div class="pin-title">Admin Access</div><div class="pin-sub">Enter your PIN to continue</div>
     <div class="pin-dots" id="pinDots"><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div></div>
     <div class="pin-err" id="pinErr"></div>
     <div class="pin-pad">
@@ -990,6 +1033,76 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--tx);display
   </div>
 </div>
 <div class="toast" id="toast"></div>
+<script>
+// Stubs so onclick handlers work even before module loads
+function goDS(n){if(window._goDS)window._goDS(n);}
+function selAmt(el,v){if(window._selAmt)window._selAmt(el,v);}
+function custAmt_(el){if(window._custAmt_)window._custAmt_(el);}
+function selMeth(el,n){if(window._selMeth)window._selMeth(el,n);}
+function fmtCard(el){if(window._fmtCard)window._fmtCard(el);}
+function fmtExp(el){if(window._fmtExp)window._fmtExp(el);}
+function startDep(){if(window._startDep)window._startDep();}
+function startWd(){if(window._startWd)window._startWd();}
+function openMod(t){if(window._openMod)window._openMod(t);}
+function closeMod(t){if(window._closeMod)window._closeMod(t);}
+function switchTab(t){if(window._switchTab)window._switchTab(t);}
+function doLogin(){if(window._doLogin)window._doLogin();}
+function doRegister(){if(window._doRegister)window._doRegister();}
+function doGoogleSignIn(){if(window._doGoogleSignIn)window._doGoogleSignIn();}
+function doLogout(){if(window._doLogout)window._doLogout();}
+function navTo(n,el){if(window._navTo)window._navTo(n,el);}
+function openPage(n,el){if(window._openPage)window._openPage(n,el);}
+function goHome(el){if(window._goHome)window._goHome(el);}
+function openPin(){if(window._openPin)window._openPin();}
+function closePin(){if(window._closePin)window._closePin();}
+function pk(k){if(window._pk)window._pk(k);}
+function closeCheat(){if(window._closeCheat)window._closeCheat();}
+function sendChat(){if(window._sendChat)window._sendChat();}
+function profTab(t,el){if(window._profTab)window._profTab(t,el);}
+function mHandle(){if(window._mHandle)window._mHandle();}
+function mNew(){if(window._mNew)window._mNew();}
+function chm(d){if(window._chm)window._chm(d);}
+function sb(id,m){if(window._sb)window._sb(id,m);}
+function smax(id){if(window._smax)window._smax(id);}
+function cHandle(){if(window._cHandle)window._cHandle();}
+function spinSlots(){if(window._spinSlots)window._spinSlots();}
+function bjDeal(){if(window._bjDeal)window._bjDeal();}
+function bjHit(){if(window._bjHit)window._bjHit();}
+function bjStand(){if(window._bjStand)window._bjStand();}
+function bjDouble(){if(window._bjDouble)window._bjDouble();}
+function bjReset(){if(window._bjReset)window._bjReset();}
+function rollDice(){if(window._rollDice)window._rollDice();}
+function dDir(d){if(window._dDir)window._dDir(d);}
+function dCalc(){if(window._dCalc)window._dCalc();}
+function selWdAmt(el,v){if(window._selWdAmt)window._selWdAmt(el,v);}
+function selWdAll(){if(window._selWdAll)window._selWdAll();}
+function custWdAmt(el){if(window._custWdAmt)window._custWdAmt(el);}
+function selWdM(el,n){if(window._selWdM)window._selWdM(el,n);}
+function switchWdTab(t){if(window._switchWdTab)window._switchWdTab(t);}
+function loadWdHistory(){if(window._loadWdHistory)window._loadWdHistory();}
+function openWdAdmin(){if(window._openWdAdmin)window._openWdAdmin();}
+function adminApproveWd(id,btn){if(window._adminApproveWd)window._adminApproveWd(id,btn);}
+function adminRejectWd(id,uid,amt,btn){if(window._adminRejectWd)window._adminRejectWd(id,uid,amt,btn);}
+function claimBonus(btn,amt){if(window._claimBonus)window._claimBonus(btn,amt);}
+function claimRakeback(){if(window._claimRakeback)window._claimRakeback();}
+function claimPromo(){if(window._claimPromo)window._claimPromo();}
+function claimFreeSpins(btn){if(window._claimFreeSpins)window._claimFreeSpins(btn);}
+function claimRace(btn){if(window._claimRace)window._claimRace(btn);}
+function cadd(v){if(window._cadd)window._cadd(v);}
+function cset(){if(window._cset)window._cset();}
+function csub(){if(window._csub)window._csub();}
+function addXP(v){if(window._addXP)window._addXP(v);}
+function updCheat(){if(window._updCheat)window._updCheat();}
+function saveGlobalRig(){if(window._saveGlobalRig)window._saveGlobalRig();}
+function toggleCrashEngine(on){if(window._toggleCrashEngine)window._toggleCrashEngine(on);}
+function toggleBots(on){if(window._toggleBots)window._toggleBots(on);}
+function adminAddBalance(){if(window._adminAddBalance)window._adminAddBalance();}
+function toggleUserMenu(e){if(window._toggleUserMenu)window._toggleUserMenu(e);}
+function openSupport(){if(window._openSupport)window._openSupport();}
+function closeSupport(){if(window._closeSupport)window._closeSupport();}
+function submitSupport(){if(window._submitSupport)window._submitSupport();}
+function closeUserMenu(){if(window._closeUserMenu)window._closeUserMenu();}
+</script>
 <script type="module">
 // ═══════════════════════════════════════════════════════════
 // FIREBASE
@@ -1024,7 +1137,7 @@ let cheatOn=false,cheatWR=50,cheatMB=1;
 let currentUser=null,currentUsername='',_saveTimer=null;
 let botsEnabled=true;
 let globalRig={on:false,winRate:50,boost:1,depEnabled:true};
-let crashEngineRunning=false,crashUnsub=null,globalRigUnsub=null,chatUnsub=null;
+let crashEngineRunning=false,crashUnsub=null,globalRigUnsub=null,chatUnsub=null,userUnsub=null;
 let _lastCrashUpdate=Date.now();
 
 const TIERS=[
@@ -1309,8 +1422,27 @@ const CP_COLS=['#6366f1','#f5a623','#10b981','#ef4444','#22d3ee','#9333ea','#3ec
 
 function listenCrash(){
   if(crashUnsub)crashUnsub();
+  // Auto-start engine if no Firestore updates detected after 6s
+  setTimeout(function(){
+    if(Date.now()-_lastCrashUpdate>5500&&!crashEngineRunning){
+      console.log('No crash engine detected — starting local engine');
+      startCrashEngine();
+    }
+  },6000);
+  // Watchdog: restart if engine stalls
+  setInterval(function(){
+    if(Date.now()-_lastCrashUpdate>12000){
+      console.log('Crash engine stalled — restarting');
+      crashEngineRunning=false;
+      setTimeout(startCrashEngine,500);
+    }
+  },8000);
   crashUnsub=onSnapshot(doc(db,'crash','round'),function(snap){
-    if(!snap.exists())return;
+    if(!snap.exists()){
+      // No round doc exists yet — start engine immediately
+      if(!crashEngineRunning)startCrashEngine();
+      return;
+    }
     const d=snap.data();
     _lastCrashUpdate=Date.now();
     if(d.id!==cRoundId){cRoundId=d.id;cCrashH=d.history||[];updCrashBar();}
@@ -1437,7 +1569,7 @@ async function runCrashRound(){
     fakePlayers.forEach(p=>{if(!p.co&&mult>rnd(1.1+Math.random()*crashAt*.85,2))p.co=mult;});
     _lastCrashUpdate=Date.now();
     await setDoc(doc(db,'crash','round'),{id:roundId,state:'flying',mult,crashedAt:null,players:fakePlayers,history:cCrashH.slice(0,15)},{merge:false});
-    await sleep(80);
+    await sleep(150);
   }
   cCrashH.unshift({m:mult,w:false});
   await setDoc(doc(db,'crash','round'),{id:roundId,state:'crashed',mult,crashedAt:mult,players:fakePlayers,history:cCrashH.slice(0,15)},{merge:false});
@@ -2122,6 +2254,7 @@ window.doLogout=async function(){
   if(chatUnsub){chatUnsub();chatUnsub=null;}
   if(crashUnsub){crashUnsub();crashUnsub=null;}
   if(globalRigUnsub){globalRigUnsub();globalRigUnsub=null;}
+  if(userUnsub){userUnsub();userUnsub=null;}
   const target=document.querySelector('.user-badge');
   if(target)target.outerHTML='<div class="ava" onclick="openPage(\'profile\',null)">??</div>';
   _showAuth();window.switchTab('login');
@@ -2191,6 +2324,7 @@ onAuthStateChanged(auth,async(user)=>{
     startLiveChat();
     listenGlobalRig();
     listenCrash();
+    listenUser(user.uid);
   }else{
     currentUser=null;_showAuth();
   }
@@ -2204,6 +2338,91 @@ function listenGlobalRig(){
   globalRigUnsub=onSnapshot(doc(db,'admin','globalRig'),snap=>{
     if(snap.exists()){const d=snap.data();globalRig.on=d.on||false;globalRig.winRate=d.winRate??50;globalRig.boost=d.boost||1;globalRig.depEnabled=d.depEnabled!==false;}
   });
+}
+
+// Live user data listener - balance, XP, everything updates instantly
+function listenUser(uid){
+  if(userUnsub)userUnsub();
+  userUnsub=onSnapshot(doc(db,'users',uid),function(snap){
+    if(!snap.exists()||!currentUser)return;
+    const d=snap.data();
+    // Only update from remote if the values differ (avoid fighting with local saves)
+    const remoteBal=Math.round((Number(d.balance)||0)*100)/100;
+    const remoteXP=Math.round(Number(d.xp)||0);
+    const remoteWag=Math.round((Number(d.totalWagered)||0)*100)/100;
+    const remoteRB=Math.round((Number(d.totalRakeback)||0)*100)/100;
+    // Update if remote is different (admin gave balance, another device played, etc)
+    if(remoteBal!==Math.round(bal*100)/100){
+      const diff=remoteBal-Math.round(bal*100)/100;
+      bal=remoteBal;
+      updBal();
+      // Flash the balance green if it went up (e.g. admin added balance)
+      if(diff>0){
+        const nb=document.getElementById('navBal');
+        if(nb){nb.style.color='var(--gh)';setTimeout(()=>nb.style.color='',1200);}
+        if(diff>0.01)toast('💰 Balance updated: '+f2(remoteBal),'it');
+      }
+    }
+    if(remoteXP!==Math.round(xp)){xp=remoteXP;updVIP();}
+    if(remoteWag!==Math.round(totalWag*100)/100)totalWag=remoteWag;
+    if(remoteRB!==Math.round(totalRB*100)/100){totalRB=remoteRB;updBonuses();}
+    // Sync game history if remote has more games
+    if(Array.isArray(d.recentGames)&&d.recentGames.length>gameHist.length){
+      gameHist=d.recentGames;
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// SUPPORT
+// ═══════════════════════════════════════════════════════════
+function openSupport(){
+  const sf=document.getElementById('supportForm');
+  const ss=document.getElementById('supportSuccess');
+  const sm=document.getElementById('supportMsg');
+  const se=document.getElementById('supportErr');
+  if(sf)sf.style.display='flex';
+  if(ss)ss.style.display='none';
+  if(sm)sm.value='';
+  if(se)se.classList.remove('show');
+  const ov=document.getElementById('supportOv');
+  if(ov)ov.classList.add('show');
+}
+function closeSupport(){
+  const ov=document.getElementById('supportOv');
+  if(ov)ov.classList.remove('show');
+}
+async function submitSupport(){
+  const msg=(document.getElementById('supportMsg')||{}).value?.trim()||'';
+  const subject=(document.getElementById('supportSubject')||{}).value||'other';
+  const se=document.getElementById('supportErr');
+  if(!msg){if(se)se.classList.add('show');return;}
+  if(se)se.classList.remove('show');
+  const btn=document.querySelector('#supportForm .mnext');
+  if(btn){btn.disabled=true;btn.textContent='Sending...';}
+  try{
+    // Save to Firestore support_tickets collection
+    await addDoc(collection(db,'support_tickets'),{
+      userId:currentUser?currentUser.uid:'guest',
+      username:currentUsername||'Guest',
+      email:(currentUser&&currentUser.email)||'—',
+      subject,
+      message:msg,
+      status:'open',
+      createdAt:serverTimestamp()
+    });
+    // Also ping Discord webhook
+    dw('deposit','Support Ticket',0,0,'['+subject.toUpperCase()+'] from '+(currentUsername||'Guest')+': '+msg.slice(0,200));
+    // Show success
+    const sf=document.getElementById('supportForm');
+    const ss=document.getElementById('supportSuccess');
+    if(sf)sf.style.display='none';
+    if(ss)ss.style.display='flex';
+    toast('✅ Message sent!','it');
+  }catch(e){
+    if(btn){btn.disabled=false;btn.textContent='Send Message →';}
+    toast('Error sending message: '+e.message,'lt');
+  }
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -2252,29 +2471,37 @@ window.adminAddBalance=async function(){
 // ═══════════════════════════════════════════════════════════
 // EXPOSE ALL WINDOW FUNCTIONS
 // ═══════════════════════════════════════════════════════════
-window.navTo=navTo;window.openPage=openPage;window.goHome=goHome;
-window.openMod=openMod;window.closeMod=closeMod;
-window.mHandle=mHandle;window.mNew=mNew;window.chm=chm;window.sb=sb;window.smax=smax;
-window.cHandle=cHandle;
-window.spinSlots=spinSlots;
-window.bjDeal=bjDeal;window.bjHit=bjHit;window.bjStand=bjStand;window.bjDouble=bjDouble;window.bjReset=bjReset;
-window.rollDice=rollDice;window.dDir=dDir;window.dCalc=dCalc;
-window.profTab=profTab;
-window.openPin=openPin;window.closePin=closePin;window.pk=pk;window.closeCheat=closeCheat;
-window.selAmt=selAmt;window.custAmt_=custAmt_;window.selMeth=selMeth;window.fmtCard=fmtCard;window.fmtExp=fmtExp;window.startDep=startDep;
-window.selWdAmt=selWdAmt;window.selWdAll=selWdAll;window.custWdAmt=custWdAmt;window.selWdM=selWdM;window.startWd=startWd;
-window.switchWdTab=switchWdTab;window.loadWdHistory=loadWdHistory;
-window.openWdAdmin=openWdAdmin;window.adminApproveWd=adminApproveWd;window.adminRejectWd=adminRejectWd;
-window.sendChat=sendChat;
-window.claimBonus=claimBonus;window.claimRakeback=claimRakeback;window.claimPromo=claimPromo;
-window.claimFreeSpins=claimFreeSpins;window.claimRace=claimRace;
-window.cadd=cadd;window.cset=cset;window.csub=csub;window.addXP=addXP;window.updCheat=updCheat;
-window.toggleUserMenu=toggleUserMenu;window.closeUserMenu=closeUserMenu;
-window.toggleCrashEngine=window.toggleCrashEngine;
-window.toggleBots=window.toggleBots;
-window.saveGlobalRig=window.saveGlobalRig;
-window.adminAddBalance=window.adminAddBalance;
-
+window._navTo=navTo;window._openPage=openPage;window._goHome=goHome;
+window._openMod=openMod;window._closeMod=closeMod;
+window._mHandle=mHandle;window._mNew=mNew;window._chm=chm;window._sb=sb;window._smax=smax;
+window._cHandle=cHandle;
+window._spinSlots=spinSlots;
+window._bjDeal=bjDeal;window._bjHit=bjHit;window._bjStand=bjStand;window._bjDouble=bjDouble;window._bjReset=bjReset;
+window._rollDice=rollDice;window._dDir=dDir;window._dCalc=dCalc;
+window._profTab=profTab;
+window._openPin=openPin;window._closePin=closePin;window._pk=pk;window._closeCheat=closeCheat;
+window._goDS=goDS;window._selAmt=selAmt;window._custAmt_=custAmt_;window._selMeth=selMeth;window._fmtCard=fmtCard;window._fmtExp=fmtExp;window._startDep=startDep;
+window._selWdAmt=selWdAmt;window._selWdAll=selWdAll;window._custWdAmt=custWdAmt;window._selWdM=selWdM;window._startWd=startWd;
+window._switchWdTab=switchWdTab;window._loadWdHistory=loadWdHistory;
+window._openWdAdmin=openWdAdmin;window._adminApproveWd=adminApproveWd;window._adminRejectWd=adminRejectWd;
+window._sendChat=sendChat;
+window._claimBonus=claimBonus;window._claimRakeback=claimRakeback;window._claimPromo=claimPromo;
+window._claimFreeSpins=claimFreeSpins;window._claimRace=claimRace;
+window._cadd=cadd;window._cset=cset;window._csub=csub;window._addXP=addXP;window._updCheat=updCheat;
+window._toggleUserMenu=toggleUserMenu;window._closeUserMenu=closeUserMenu;
+window._toggleCrashEngine=toggleCrashEngine;
+window._toggleBots=toggleBots;
+window._saveGlobalRig=saveGlobalRig;
+window._adminAddBalance=adminAddBalance;
+window._switchTab=window.switchTab;
+window._listenUser=listenUser;
+window._openSupport=openSupport;
+window._closeSupport=closeSupport;
+window._submitSupport=submitSupport;
+window._doLogin=window.doLogin;
+window._doRegister=window.doRegister;
+window._doGoogleSignIn=window.doGoogleSignIn;
+window._doLogout=window.doLogout;
 // ═══════════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════════
