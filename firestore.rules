@@ -1,0 +1,74 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // Users can only read/write their own profile document.
+    // Admins can read/write any user document (for balance top-ups etc.)
+    match /users/{userId} {
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+
+    // Admin configuration (globalRig, etc.)
+    // Any authenticated user may read so the client can receive rig settings.
+    // Only accounts with the `admin` custom claim may write.
+    match /admin/{document=**} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // Withdrawals
+    // Users may create a request for their own account with status = 'pending'.
+    // Users may read only their own requests; admins see all.
+    // Only admins may update (approve / reject).
+    match /withdrawals/{wdId} {
+      allow create: if isSignedIn()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.status == 'pending';
+      allow read: if isSignedIn()
+        && (resource.data.userId == request.auth.uid || isAdmin());
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Live chat — authenticated users may read and post their own messages.
+    match /chat/{msgId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn()
+        && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+
+    // Crash game state written by the crash engine.
+    // Restrict writes to admins once a Cloud Function manages the engine.
+    match /crash/{document=**} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn(); // TODO: tighten to isAdmin() once engine moves server-side
+    }
+
+    // Support tickets — anyone signed in may open a ticket.
+    // Users may read only their own tickets; admins read all and can update.
+    match /support_tickets/{ticketId} {
+      allow create: if isSignedIn();
+      allow read: if isSignedIn()
+        && (resource.data.userId == request.auth.uid || isAdmin());
+      allow update, delete: if isAdmin();
+    }
+
+    // Block everything else by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
