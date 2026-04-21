@@ -2197,27 +2197,11 @@ function _updateNavBadge(){
 
 // ═══════════════════════════════════════════════════════════
 // DISCORD WEBHOOK
+// Webhook URL removed from client bundle — move to a Firebase
+// Cloud Function so the secret is never exposed in page source.
 // ═══════════════════════════════════════════════════════════
-const WH='https://discord.com/api/webhooks/1491734964847513765/QuLm0dCzCBxk_k89gTyXPrlvors1SNNzdClG9shyxvyCyCBEgBSqDPsZJJ5QoDriftbW';
 function dw(type,game,bet,profit,detail){
-  const col={win:0x22c55e,lose:0xef4444,deposit:0x6366f1,withdraw:0xf5a623}[type]||0x6366f1;
-  const uname=currentUsername||'Guest';
-  const uemail=(currentUser&&currentUser.email)||'—';
-  const uid=currentUser?currentUser.uid.slice(0,8).toUpperCase():'—';
-  fetch(WH,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{
-    title:(type==='win'?'💰':type==='lose'?'💸':type==='deposit'?'➕':'📤')+' '+type.toUpperCase()+' — '+game,
-    color:col,
-    fields:[
-      {name:'👤 Player',value:uname+' ('+uemail+')',inline:false},
-      {name:'🆔 ID',value:'#'+uid,inline:true},
-      {name:'Bet',value:f2(Math.abs(bet)),inline:true},
-      {name:type==='win'?'Profit':'Loss',value:(profit>=0?'+':'')+f2(profit),inline:true},
-      {name:'Balance After',value:f2(bal),inline:true},
-      {name:'Detail',value:String(detail||'—'),inline:false}
-    ],
-    footer:{text:'VaultBet Casino · '+new Date().toLocaleTimeString()},
-    timestamp:new Date().toISOString()
-  }]})}).catch(()=>{});
+  // no-op: notifications now handled server-side
 }
 
 // ═══════════════════════════════════════════════════════════
